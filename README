@@ -1,0 +1,96 @@
+
+
+Dependencies:
+ - python 2.7
+ - flask
+ - github3.py
+
+
+Scrapers:
+ -          forums (???)
+            - recent topics
+            - recent activity
+            - online users
+ -          survival killstats
+ -          usage stats
+ -          minecraft client
+ -          subreddit
+ - DONE     wiki
+ - DONE     mumble
+ - SKIP     irc
+
+
+
+=========== HEADER ============
+
+- servers
+  - up/down
+  - player count
+  - player list
+  - live chat
+
+========== PAGES ==========
+
+nerd.nu/creative
+ - online players
+ - description
+ - creations
+ - cartos
+ - map downloads
+ - subpages
+   - /chat
+   - /usage
+   - /graphs
+nerd.nu/survival
+ - subpages
+   - /scoreboard
+   - /bounties
+   - /clans?
+nerd.nu/pve
+nerd.nu/appeal
+nerd.nu/donate
+nerd.nu/logs
+nerd.nu/rules
+nerd.nu/community
+ - forums
+ - subreddit
+ - mumble
+ - irc
+ - wiki
+nerd.nu/p[layer]/<username>
+  - online on
+    - server
+  - usage stats
+  - bans?
+  - position on staff
+  - skin
+  - last seen
+  - badges
+  - survival stuff
+    - clan
+    - bountries
+    - pvp stats
+  - editable
+    - bio
+    - fav server
+    - interests
+    - twitter
+    - youtube
+
+
+TABLES
+------
+
+ - players (uuid, username, password)
+ - badges (uuid, badge icon, badge text)
+ - creations (name, server, rev, x, z) (key = (name, server, rev))
+ - revisions (server, rev, start, end)
+ - cache (key, name)
+
+CACHE KEYS
+----------
+
+RULES - html of rules
+FORUMS_LATEST
+TWITTER_LATEST
+SUBREDDIT_LATEST

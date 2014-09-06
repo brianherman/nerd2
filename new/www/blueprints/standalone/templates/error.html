@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="headerless">
+        {% if error.code == 404 %}
+            <p>The resource you requested could not be found. It may have been removed, or perhaps it never existed in the first place.</p>
+            <p>Check the URL and try again.</p>
+            <p><a href="{{ url_for('standalone.index') }}">Return to index</a></p>
+        {% elif error.code == 500 %}
+            <p>Internal server error</p>
+            <p>Try reloading the page in a few minutes, and email <a href="mailto://outage@nerd.nu">outage@nerd.nu</a> if the problem persists.</p>
+        {% endif %}
+    </div>
+{% endblock %}

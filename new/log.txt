@@ -1,0 +1,21 @@
+looping
+looping
+looping
+looping
+looping
+looping
+looping
+looping
+firing
+{u'x': u'12', u'r': u'3', u'z': u'-1272'}
+{u'x': u'-632', u'r': u'11', u'z': u'1772'}
+{u'x': u'0', u'r': u'5', u'z': u'-300'}
+{u'x': u'1500', u'r': u'6', u'z': u'0'}
+{u'x': u'-52', u'r': u'5', u'z': u'-1755'}
+{u'x': u'-1258', u'r': u'5', u'z': u'338'}
+{u'x': u'-1281', u'r': u'5', u'z': u'422'}
+{u'x': u'-1273', u'r': u'5', u'z': u'405'}
+{u'x': u'-1279', u'r': u'5', u'z': u'380'}
+{u'x': u'-1250', u'r': u'5', u'z': u'150', u'zoom': u'-3'}
+{u'x': u'1758', u'r': u'5', u'z': u'150'}
+{u'x': u'-65', u'r': u'10', u'z': u'-1585'}

@@ -1,0 +1,20 @@
+div.index-server a:hover {
+    /* Couldn't get this one working properly, it inherits the opacity from the parent */
+    background-color:rgb(8,8,8) !important;
+}
+div.index-server-text-wrapper {
+    background-color:rgb(0,0,0);
+    filter: alpha(opacity=60); /* IE5-7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; /* IE8 */
+}
+
+#server-background-overlay {
+    border-bottom:8px solid rgb(0,0,0);
+    filter: alpha(opacity=40); /* IE5-7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* IE8 */
+}
+#server-text-wrapper {
+    background-color:rgb(0,0,0);
+    filter: alpha(opacity=60); /* IE5-7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; /* IE8 */
+}

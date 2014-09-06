@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+  {% for server_name in server_names %}
+    <div class="index-server index-server-{{ server_name }}">
+      <div class="index-server-background-overlay">
+        <div class="index-server-text-wrapper">
+          <h2><a href="{{ url_for('server.%s_index' % server_name) }}">{{ server_name }}</a></h2>
+          <p class="index-server-online">
+            {% if server_status[server_name]['up'] %}{{ server_status[server_name]['numplayers'] }}/{{ server_status[server_name]['maxplayers'] }} online
+            {% else %}currently down!{% endif %}
+          </p>
+          <p>{{ server_detail[server_name]['tagline'] }}</p>
+        </div>
+        <div class="index-server-text-wrapper">
+          connect at <strong>{{ server_detail[server_name]['address'] }}</strong>
+        </div>
+        {% for link_text, link_href in server_detail[server_name]['links'] %}
+          <div class="index-server-text-wrapper">
+            view the <a href="{{ link_href }}"><strong>{{ link_text }}</strong></a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
+{% block content %}
+  <div class="headerless">
+    <p>Welcome to nerd.nu. Fair, fast, and friendly <a href="http://www.minecraft.net">Minecraft</a> servers. Jump in today!</p>
+    <p>Founded in June 2009, the MCPublic servers are the oldest Minecraft servers out there. We are dedicated to being public - no whitelists and no client mods or texture packs necessary! Ours is a robust community, encompassing all sorts of Minecraft players on our three servers - Creative, Player vs. Environment, and Survival (Player vs. Player).
+    <p>Every now and then we hold special events. In January 2012 we held a city-building competition and raised $800 for the charity <a href="http://www.childsplaycharity.org/">Child’s Play</a>. Another event, held in April 2012, boasted a blend of capture the flag, king-of-the-hill, and chaos pvp.</p>
+    <p>No matter your flavor of Minecraft, you are likely to find a place among our community. Welcome to nerd.nu!</p>
+  </div>
+
+{% endblock %}
