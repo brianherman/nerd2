@@ -1,0 +1,13 @@
+{
+  "creative": {
+    "up": true,
+    "numplayers": 32,
+    "maxplayers": 64,
+    "players": [
+      "bob",
+      "susie",
+      "jeff",
+      "joe"
+    ]
+  }
+}

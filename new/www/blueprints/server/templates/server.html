@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block js %}
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='server.js') }}"></script>
+{% endblock %}
+{% block pagetitle %}
+  <h2 class="server server-{{ title }}">
+      <span id="server-background-overlay">
+          <span id="server-text-wrapper"><span id="server-name">{{ title }}</span>: <em>{{ addr[title] }}</em></span>
+      </span>
+  </h2>
+{% endblock %}
+{% block content %}
+  {% if status.up %}
+    <p><strong>{{ status.numplayers }}/{{ status.maxplayers }}</strong> players online
+      {% if status.players %}
+        <a href="#" id="players-showhide">show/hide</a></p>
+        <ul id="players-list">
+          {% for player in status.players %}
+            <li>{{ player }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        </p>
+      {% endif %}
+  {% endif %}
+  
+  {% autoescape false %}
+    {{ description }}
+  {% endautoescape %}
+  <p>Read more <a href="http://redditpublic.com/wiki/{{ title }}">on the wiki</a></p>
+  
+  {% if subreddit %}
+    <h3>community</h3>
+    <ul class="community">
+      {% for post in subreddit %}
+        <li>
+          <span class="sr-content">
+            <span class="title"><a href="{{ post.url }}">{{ post.title }}</a></span>
+            <span class="author"><a href="http://www.reddit.com/user/{{ post.author }}">{{ post.author }}</a></span>
+            <span class="comments">{{ post.num_comments }} <a href="{{ post.permalink }}">comments</a></span>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+  {% if github %}
+    <h3>issues</h3>
+    <ul class="community">
+      {% for issue in github %}
+        <li>
+          <span class="sr-content">
+            <span class="title"><a href="{{ issue.url }}">{{ issue.title }}</a></span>
+            <span class="author">{{ issue.author }}</span>
+            <span class="comments">{{ issue.num_comments }} comments</span>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+  <h3 id="builds-header">builds</h3>
+  
+  <span id="current-rev">{{ current_rev }}</span>
+
+  <span id="rev-label">pick a revision</span>
+  <ol id="rev-list">
+    {% for i in range(1, current_rev+1) %}
+      <li><a href="#" id="label-rev-{{ i }}"{% if i==current_rev %} class="selected"{% endif %}>{{ i }}</a></li>
+    {% endfor %}
+  </ol>
+
+  <!-- the following data is filled in at run-time by js -->
+  <span id="build-links">
+    <a id="map-download" href="#">download world</a>
+    <a id="carto" href="#">view carto</a>
+  </span>
+  
+  <div id="builds"></div>
+  
+  <h3>usage</h3>
+  <img src="http://nerd.nu/stats/{{ title }}-day.png" class="usage" />
+  
+  {% if top_players %}
+    <h3>top players</h3>
+    <p>most active users in the last week</p>
+    <ol>
+      {% for player in top_players %}
+        <li><strong>{{ player.name }}</strong>: {{ player.hours }}h</li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+  
+{% endblock %}

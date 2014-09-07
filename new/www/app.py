@@ -1,8 +1,8 @@
-from flask import Flask
-
-from www import config, blueprints, util
+from flask import Flask, render_template
 
 app = Flask(__name__)
+
+from www import blueprints, util #config, blueprints, util
 
 for blueprint in blueprints.blueprints:
     app.register_blueprint(blueprint)
@@ -14,4 +14,4 @@ def error(error):
         'title': 'Oh no! %s' % error.message,
         'error': error,
     }
-    return util.render_with_header('error.html', **options), error.code
+    return render_template('error.html', **options), error.code

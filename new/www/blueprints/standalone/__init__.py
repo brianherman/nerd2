@@ -1,12 +1,10 @@
-from flask import Blueprint
-
-from www.util import render_with_header
+from flask import Blueprint, render_template
 
 blueprint = Blueprint('standalone', __name__, template_folder='templates')
 
 @blueprint.route('/')
 def index():
-    return render_with_header('index.html',
+    return render_template('index.html',
         server_detail = {
             'creative': {
                 'address': 'c.nerd.nu',

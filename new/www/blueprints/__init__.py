@@ -6,5 +6,4 @@ blueprint_packages = [
     server
 ]
 
-
 blueprints = [p.blueprint for p in blueprint_packages]

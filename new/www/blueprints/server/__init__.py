@@ -1,6 +1,18 @@
-from flask import Blueprint, request
+from flask import Blueprint, render_template, request, current_app
 
-from www.util import render_with_header
+import json
+
+def load_json(filename):
+    with current_app.open_resource('scraped/'+filename) as json_data:
+        d = json.load(json_data)
+        json_data.close()
+        return d
+
+def load_html(filename):
+    with current_app.open_resource('scraped/'+filename) as html_data:
+        d = html_data.read()
+        html_data.close()
+        return d
 
 blueprint = Blueprint('server', __name__, template_folder='templates')
 
@@ -15,7 +27,7 @@ def _index(server):
     options = {
         'title': server,
         'statuses': statuses,
-        'addr': addr,
+        'addr': 'nerd.nu',#addr,
         'description': load_html('info-%s.html' % server),
         'status': statuses[server],
         'subreddit': load_json('subreddit.json')[server][:10],
