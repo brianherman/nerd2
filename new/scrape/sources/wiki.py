@@ -207,13 +207,14 @@ class WikiSource(Source):
         for response in response_data:
             for name, carto_data in re.findall("([^\|\[]+)\]\]\s\{\{CartoP\|?([^}]+)\}\}", response['text']):
                 carto_data = dict((d.split('=') for d in carto_data.split("|")))
-                self._update_creation(
-                    name,
-                    'pve',
-                    int(carto_data['r']),
-                    int(carto_data['x']),
-                    int(carto_data['z'])
-                )
+                if name not in ('CoolTown', 'ExampleVille'):
+                    self._update_creation(
+                        name,
+                        'pve',
+                        int(carto_data['r']),
+                        int(carto_data['x']),
+                        int(carto_data['z'])
+                    )
 
     def _handle_global_creations(self, pages):
         def _callback(response_data):
