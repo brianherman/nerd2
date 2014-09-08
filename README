@@ -7,17 +7,23 @@ Dependencies:
 
 
 Scrapers:
- -          forums (???)
-            - recent topics
-            - recent activity
-            - online users
- -          survival killstats
- -          usage stats
- -          minecraft client
- -          subreddit
- - DONE     wiki
- - DONE     mumble
- - SKIP     irc
+ - forums
+   - recent topics (via RSS)
+ - survival-specific
+   - bounties
+   - leaderboards
+ - usage stats
+ - staff
+ - minecraft client
+ - minecraft ping [IMPR]
+ - subreddit
+ - wiki [IMPR]
+   - creations [IMPR]
+   - rules [DONE]
+   - current revs [DONE]
+   - irc quotes
+ - mumble [DONE]
+ - irc [DONE]
 
 
 
@@ -52,11 +58,14 @@ nerd.nu/donate
 nerd.nu/logs
 nerd.nu/rules
 nerd.nu/community
- - forums
- - subreddit
- - mumble
- - irc
+ - forums (display recent topics)
+ - subreddit (display recent posts)
+ - mumble (display online count)
+ - irc (display online count + random quote)
  - wiki
+   - new content?
+   - recent activity?
+   - random page?
 nerd.nu/p[layer]/<username>
   - online on
     - server
