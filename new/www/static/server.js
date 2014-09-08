@@ -28,15 +28,13 @@ function loadRevision(rev) {
     }
     
     
-    $.getJSON('/static/json/creations/'+$('#server-name').text()+'_'+rev+'.json', function(data) {
+    $.getJSON('/api/get_creations?server='+$('#server-name').text()+'&revision='+rev, function(data) {
         var list = $('<ul class="builds-1" />');
         $.each(data, function(i, v) {
-            var inner = $('<li><a class="builds-wiki" href="http://redditpublic.com/wiki/' + v['page_title'] + '">'+ v['title'] + '</a></li>');
-            if ('coordinates_normal' in v) {
-                inner.append('<a class="builds-carto" href="' +
-                    $('#carto').attr('href') + '#/' + v['coordinates_normal'][0] + '/64/' + v['coordinates_normal'][1] + '/-2/0/0' +
-                    '">' + v['coordinates_normal'][0] + ', ' + v['coordinates_normal'][1] + '</a>');
-            }
+            var inner = $('<li><a class="builds-wiki" href="http://redditpublic.com/wiki/' + v['name'] + '">'+ v['name'] + '</a></li>');
+            inner.append('<a class="builds-carto" href="' +
+                $('#carto').attr('href') + '#/' + v['x'] + '/64/' + v['z'] + '/-2/0/0' +
+                '">' + v['x'] + ', ' + v['z'] + '</a>');
             list.append(inner);
         });
         $('#builds').html(list);

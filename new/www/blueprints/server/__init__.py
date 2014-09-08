@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, current_app
+from www.models.cache import Cache
 
 import json
 
@@ -21,8 +22,7 @@ def _index(server):
     if server not in ['creative', 'survival', 'pve']:
         abort(404)
     statuses = load_json('statuses.json')
-    current_rev = load_json('current_rev.json')[server]
-
+    current_rev = int(Cache.query.filter_by(key='CURRENT_REVISION_'+server.upper()).first().value)
 
     options = {
         'title': server,
