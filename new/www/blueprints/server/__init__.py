@@ -21,22 +21,18 @@ def _index(server):
     server = server.lower()
     if server not in ['creative', 'survival', 'pve']:
         abort(404)
-    statuses = load_json('statuses.json')
+    addr = {'creative': 'c.nerd.nu', 'survival': 's.nerd.nu', 'pve': 'p.nerd.nu'}
     current_rev = int(Cache.query.filter_by(key='CURRENT_REVISION_'+server.upper()).first().value)
 
     options = {
         'title': server,
-        'statuses': statuses,
-        'addr': 'nerd.nu',#addr,
-        'description': load_html('info-%s.html' % server),
-        'status': statuses[server],
-        'subreddit': load_json('subreddit.json')[server][:10],
-        'github': filter(lambda a: server in a['tags'], load_json('github.json'))[:10],
-        'current_rev': current_rev,
-        'top_players': load_json('top_players.json')[server][:20]}
+        'addr': addr,
+        #'subreddit': load_json('subreddit.json')[server][:10],
+        #'github': filter(lambda a: server in a['tags'], load_json('github.json'))[:10],
+        'current_rev': current_rev#,
+        #'top_players': load_json('top_players.json')[server][:20]
+    }
 
-    if server == 'survival':
-        del options['status']['players']
     return render_template('server.html', **options)
 
 
