@@ -46,17 +46,18 @@ class MinecraftPingFactory(ClientFactory):
     protocol = MinecraftPingProtocol
 
 
-class IRCSource(Source):
+class MinecraftPingSource(Source):
     def start(self):
         task.LoopingCall(self.update).start(10*60)
     def update(self):
-        factory = IRCFactory()
-        factory.got_users = self.got_users
-        reactor.connectTCP("irc.gamesurge.net", 6667, factory)
+        factory = MinecraftPingFactory()
+        factory.got_data = self.got_data
+        reactor.connectTCP("nerd.nu", 25565, factory)
 
-    def got_users(self, count):
-        self.api_call("update_cache",
-            key="IRC_USERS_CURRENT",
-            value=count)
+    def got_data(self, data):
+        print data
+        #self.api_call("update_cache",
+        #    key="IRC_USERS_CURRENT",
+        #    value=count)
 
-source = IRCSource
+source = MinecraftPingSource
