@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-from www import blueprints, util #config, blueprints, util
+from www import blueprints, util, models #config, blueprints, util
 
 for blueprint in blueprints.blueprints:
     app.register_blueprint(blueprint)
