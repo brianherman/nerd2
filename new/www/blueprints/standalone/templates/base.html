@@ -7,11 +7,11 @@
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Crimson+Text">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arvo:400,400italic">
-    {% block css %}{% endblock %}
+    {%- block css %}{% endblock %}
     <!--[if lt IE 9]>
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ie.css') }}" />
     <![endif]-->
-    {% block js %}{% endblock %}
+    {%- block js %}{% endblock %}
   </head>
   <body>
     <div id="header">
@@ -29,42 +29,43 @@
         </ul>
         
         <table id="server-status">
-          {% for server_name in server_names %}
+          {%- for server_name in server_names %}
             <tr>
               <th><a href="{{ url_for('server.%s_index' % server_name) }}">{{ server_name }}</a></th>
               <td>
                 <span>
-                  {% if server_status[server_name]['up'] %}
-                    {{ server_status[server_name]['numplayers'] }} online
-                  {% else %}
-                    down
-                  {% endif %}
+                  {%- if get_status(server_name) %}
+                  {{ get_players(server_name) }} online
+                  {%- else %}
+                  down
+                  {%- endif %}
                 </span>
               </td>
             </tr>
-          {% endfor %}
+          {%- endfor %}
         </table>
       </div>
     </div>
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul id="flashes">
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
+    {%- with messages = get_flashed_messages() %}
+    {%- if messages %}
+    <ul id="flashes">
+      {%- for message in messages %}
+      <li>{{ message }}</li>
+      {%- endfor %}
         </ul>
-      {% endif %}
-    {% endwith %}
-    {% block precontent %}{% endblock %}
+    {%- endif %}
+    {%- endwith %}
+
+    {%- block precontent %}{% endblock %}
     
     <div id="content">
-      {% block pagetitle %}
+      {%- block pagetitle %}
         <h2>{{ title }}</h2>
-      {% endblock %}
+      {%- endblock %}
       
       <div id="content-inner">
-        {% block content %}{{ body }}{% endblock %}
+        {%- block content %}{{ body }}{% endblock %}
       </div>
       
       <div id="footer">

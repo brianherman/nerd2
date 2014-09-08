@@ -1,27 +1,24 @@
 from www.app import app
-
-server_names = ['creative', 'survival', 'pve']
-server_status = {
-    'creative': {
-        'numplayers': 9,
-        'maxplayers': 150,
-        'up': False
-    },
-    'survival': {
-        'numplayers': 27,
-        'maxplayers': 150,
-        'up': True
-    },
-    'pve': {
-        'numplayers': 166,
-        'maxplayers': 200,
-        'up': True
-    }
-}
+from www.models.cache import Cache
 
 @app.context_processor
-def inject_server():
+def inject_servers():
+    server_names = ['creative', 'survival', 'pve']
+    return dict(server_names=server_names)
+
+
+@app.context_processor
+def utility_processor():
+    def get_status(server):
+        return True
+    def get_players(server):
+        current = Cache.query.filter_by(
+            key="MC_"+server.upper()+"_USERS_CURRENT"
+        ).first().value
+        max = Cache.query.filter_by(
+            key="MC_"+server.upper()+"_USERS_MAX"
+        ).first().value
+        return current+'/'+max
     return dict(
-        server_names=server_names,
-        server_status=server_status
-    )
+        get_players=get_players,
+        get_status=get_status)
