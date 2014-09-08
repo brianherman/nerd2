@@ -23,13 +23,12 @@ def _index(server):
         abort(404)
     addr = {'creative': 'c.nerd.nu', 'survival': 's.nerd.nu', 'pve': 'p.nerd.nu'}
     current_rev = int(Cache.query.filter_by(key='CURRENT_REVISION_'+server.upper()).first().value)
-    print Cache.query.filter_by(key='MC_'+server.upper()+'_TOP_PLAYERS').first().value
 
     options = {
         'title': server,
         'addr': addr,
-        #'subreddit': load_json('subreddit.json')[server][:10],
-        #'github': filter(lambda a: server in a['tags'], load_json('github.json'))[:10],
+        'subreddit': json.loads(Cache.query.filter_by(key='REDDIT_'+server.upper()+'_POSTS').first().value),
+        'github': json.loads(Cache.query.filter_by(key='GITHUB_'+server.upper()+'_ISSUES').first().value),
         'current_rev': current_rev,
         'top_players': json.loads(Cache.query.filter_by(key='MC_'+server.upper()+'_TOP_PLAYERS').first().value)
     }
