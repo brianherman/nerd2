@@ -53,7 +53,10 @@ class WikiSource(Source):
             response_data = response_data_old['query']['pages'].values()
             #print response_data
             for p in response_data:
-                p['text'] = p['revisions'][0]['*']
+                try:
+                    p['text'] = p['revisions'][0]['*']
+                except exception.KeyError:
+                    print "Page "+p['title']+" does not exist."
             d0.callback(response_data)
 
         def _errback(e):
@@ -194,7 +197,7 @@ class WikiSource(Source):
             if m:
                 self._update_creation(
                     m.group(1),
-                    'c',
+                    'creative',
                     revision,
                     int(m.group(2)),
                     int(m.group(3))
@@ -206,7 +209,7 @@ class WikiSource(Source):
                 carto_data = dict((d.split('=') for d in carto_data.split("|")))
                 self._update_creation(
                     name,
-                    'p',
+                    'pve',
                     int(carto_data['r']),
                     int(carto_data['x']),
                     int(carto_data['z'])
@@ -227,6 +230,12 @@ class WikiSource(Source):
 
                         found_carto_template = False
                         for server, carto_data in re.findall('\{\{Carto([CSP])\|?([^}]+)\}\}', args['coordinates']):
+                            if server == 'C':
+                                server = 'creative'
+                            elif server == 'S':
+                                server = 'survival'
+                            elif server == 'P':
+                                server = 'pve'
                             found_carto_template = True
                             carto_data = dict((d.split('=') for d in carto_data.split("|")))
                             if 'r' in carto_data \
@@ -245,7 +254,7 @@ class WikiSource(Source):
                             try:
                                 revision = int(args.get('map_revision', None))
                             except:
-                                revision = None
+                                revision = 0
 
                             server = args.get('server', '')\
                                 .replace('[', '')\
@@ -253,9 +262,16 @@ class WikiSource(Source):
                                 .lower()
 
                             if server in ('creative', 'survival', 'pve', 'c', 's', 'p'):
-                                server = server[0]
+                                if server == 'c':
+                                    server = 'creative'
+                                elif server == 's':
+                                    server = 'survival'
+                                elif server == 'p':
+                                    server = 'pve'
+                                else:
+                                    server = server[0]
                             else:
-                                server = None
+                                server = 'unknown'
 
                             coords = re.findall('-?\d+', args['coordinates'])
 
@@ -266,7 +282,7 @@ class WikiSource(Source):
                             if len(coords) == 2:
                                 coords = (int(coords[0]), int(coords[1]))
                             else:
-                                coords = None
+                                coords = [0,0]
 
                             if revision and server and coords:
                                 self._update_creation(
