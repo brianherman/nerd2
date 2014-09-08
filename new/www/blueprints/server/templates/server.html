@@ -84,10 +84,10 @@
   
   {%- if top_players %}
   <h3>top players</h3>
-  <p>most active users in the last week</p>
+  <p>top 10 most active users</p>
   <ol>
     {%- for player in top_players %}
-    <li><strong>{{ player.name }}</strong>: {{ player.hours }}h</li>
+    <li><strong>{{ player.username }}</strong>: {{ player.time }}</li>
     {%- endfor %}
   </ol>
   {%- endif %}
