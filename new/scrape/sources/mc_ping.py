@@ -36,7 +36,7 @@ class MinecraftPingProtocol(Protocol):
     def unpackVarint(self, data):
         o = 0
         for i in range(5):
-            d = data[i]
+            d = ord(data[i])
             o |= (d & 0x7F) << 7*i
             if not d & 0x80:
                 return o, data[i+1:]
