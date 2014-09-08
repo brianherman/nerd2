@@ -1,4 +1,4 @@
-from www.blueprints import standalone, wiki, server
+from www.blueprints import standalone, wiki, server, api
 
 blueprint_packages = [
     standalone,
