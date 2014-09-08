@@ -38,7 +38,7 @@ class MumbleProtocol(DatagramProtocol):
 
 class MumbleSource(Source):
     def start(self):
-        p = MumbleProtocol('mumble.nerd.nu', 6162)
+        p = MumbleProtocol('198.50.141.182', 6162) #198.50.141.182 PTR mumble.nerd.nu
         p.got_users = self.got_users
         reactor.listenUDP(0, p)
 
