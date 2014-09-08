@@ -48,16 +48,29 @@ class MinecraftPingFactory(ClientFactory):
 
 class MinecraftPingSource(Source):
     def start(self):
-        task.LoopingCall(self.update).start(10*60)
+        task.LoopingCall(self.update).start(15)
+
     def update(self):
-        factory = MinecraftPingFactory()
-        factory.got_data = self.got_data
-        reactor.connectTCP("nerd.nu", 25565, factory)
+        servers = ["c.nerd.nu", "s.nerd.nu", "p.nerd.nu"]
+        for server in servers:
+            factory = MinecraftPingFactory()
+            factory.got_data = self.got_data
+            reactor.connectTCP(server, 25565, factory)
 
     def got_data(self, data):
-        print data['players']
-        #self.api_call("update_cache",
-        #    key="IRC_USERS_CURRENT",
-        #    value=count)
+        if "Creative" in data['description']:
+            server="CREATIVE"
+        elif "Survival" in data['description']:
+            server="SURVIVAL"
+        elif "PvE" in data['description']:
+            server="PVE"
+        else:
+            return
+        self.api_call("update_cache",
+            key="MC_"+server+"_USERS_CURRENT",
+            value=data['players']['online'])
+        self.api_call("update_cache",
+            key="MC_"+server+"_USERS_MAX",
+            value=data['players']['max'])
 
 source = MinecraftPingSource
