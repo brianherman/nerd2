@@ -33,17 +33,9 @@ class TopPlayersSource(Source):
         task.LoopingCall(self.update).start(60*60*2)
 
     def update(self):
-        ### Creative Stats
-        d = self._query('creative')
-        d.addCallback(self._handle_creative_stats)
-
-        ### Survival Stats
-        d = self._query('survival')
-        d.addCallback(self._handle_survival_stats)
-
-        ### PvE Stats
-        d = self._query('pve')
-        d.addCallback(self._handle_pve_stats)
+        for server in ("creative", "survival", "pve"):
+            d = self._query(server)
+            d.addCallback(self._handle_stats, server)
 
     def _handle_data(self, data):
         r = data['storage']['usagestats']
@@ -70,17 +62,9 @@ class TopPlayersSource(Source):
 
         return json.dumps(stats)
 
-    def _handle_creative_stats(self, response_data):
+    def _handle_stats(self, response_data, server):
         stats = self._handle_data(response_data)
-        self.api_call("update_cache", key="MC_CREATIVE_TOP_PLAYERS", value=stats)
-
-    def _handle_survival_stats(self, response_data):
-        stats = self._handle_data(response_data)
-        self.api_call("update_cache", key="MC_SURVIVAL_TOP_PLAYERS", value=stats)
-
-    def _handle_pve_stats(self, response_data):
-        stats = self._handle_data(response_data)
-        self.api_call("update_cache", key="MC_PVE_TOP_PLAYERS", value=stats)
+        self.api_call("update_cache", key="MC_"+server.upper()+"_TOP_PLAYERS", value=stats)
 
 
 source = TopPlayersSource
