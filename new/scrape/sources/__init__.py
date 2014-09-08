@@ -14,13 +14,14 @@ class Source(object):
                 'revision': kwargs['revision'], 'x': kwargs['x'], 'z': kwargs['z']}
             requests.post('http://167.88.116.28:5000/api/update_creation', data=payload)
 
-from scrape.sources import wiki, mumble, irc, mc_ping
+from scrape.sources import wiki, mumble, irc, mc_ping, top_players
 
 source_packages = [
     wiki,
     mumble,
     irc,
-    mc_ping
+    mc_ping,
+    top_players
 ]
 
 sources = [p.source for p in source_packages]
