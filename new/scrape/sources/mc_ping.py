@@ -51,21 +51,12 @@ class MinecraftPingSource(Source):
         task.LoopingCall(self.update).start(15)
 
     def update(self):
-        servers = ["c.nerd.nu", "s.nerd.nu", "p.nerd.nu"]
-        for server in servers:
+        for server in [("CREATIVE", "c.nerd.nu"), ("SURVIVAL", "s.nerd.nu"), ("PVE", "p.nerd.nu")]:
             factory = MinecraftPingFactory()
-            factory.got_data = self.got_data
-            reactor.connectTCP(server, 25565, factory)
+            factory.got_data = lambda d, server=server[0]: self.got_data(d, server)
+            reactor.connectTCP(server[1], 25565, factory)
 
-    def got_data(self, data):
-        if "Creative" in data['description']:
-            server="CREATIVE"
-        elif "Survival" in data['description']:
-            server="SURVIVAL"
-        elif "PvE" in data['description']:
-            server="PVE"
-        else:
-            return
+    def got_data(self, data, server):
         self.api_call("update_cache",
             key="MC_"+server+"_USERS_CURRENT",
             value=data['players']['online'])
