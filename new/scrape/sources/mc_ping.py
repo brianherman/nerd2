@@ -55,7 +55,7 @@ class MinecraftPingSource(Source):
         reactor.connectTCP("nerd.nu", 25565, factory)
 
     def got_data(self, data):
-        print data
+        print data['players']
         #self.api_call("update_cache",
         #    key="IRC_USERS_CURRENT",
         #    value=count)
