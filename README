@@ -16,12 +16,12 @@ Scrapers:
  - staff
  - minecraft client
  - minecraft ping [IMPR]
- - subreddit
+ - subreddit [DONE]
  - wiki [IMPR]
    - creations [IMPR]
    - rules [DONE]
    - current revs [DONE]
-   - irc quotes
+ - irc quotes
  - mumble [DONE]
  - irc [DONE]
 
