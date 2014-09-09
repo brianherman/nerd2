@@ -27,8 +27,8 @@ def _index(server):
     options = {
         'title': server,
         'addr': addr,
-        'subreddit': json.loads(Cache.query.filter_by(key='REDDIT_'+server.upper()+'_POSTS').first().value),
-        'github': json.loads(Cache.query.filter_by(key='GITHUB_'+server.upper()+'_ISSUES').first().value),
+        'subreddit': json.loads(Cache.query.filter_by(key='REDDIT_POSTS').first().value),
+        #'github': json.loads(Cache.query.filter_by(key='GITHUB_'+server.upper()+'_ISSUES').first().value),
         'current_rev': current_rev,
         'top_players': json.loads(Cache.query.filter_by(key='MC_'+server.upper()+'_TOP_PLAYERS').first().value)
     }

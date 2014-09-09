@@ -20,9 +20,9 @@ class RedditSource(Source):
             d0.errback(e)
 
         headers = {'User-Agent': 'nerd2 website bot by /u/williammck and /u/barneygale'}
-        args = {'sort': 'new', 'restrict_sr': 'on', 'limit': 10}
+        args = {'sort': 'new', 'restrict_sr': 'on'}
         args.update(request_data)
-        url = 'http://www.reddit.com/r/mcpublic/search.json?' + urllib.urlencode(args)
+        url = 'https://www.reddit.com/r/mcpublic/search.json?' + urllib.urlencode(args)
 
         d1 = client.getPage(url, headers=headers)
         d1.addCallbacks(_callback, _errback)
@@ -33,11 +33,13 @@ class RedditSource(Source):
         task.LoopingCall(self.update).start(60*60*2)
 
     def update(self):
-        for server in ("creative", "survival", "pve"):
-            d = self._query(q='flair:'+server)
-            d.addCallback(self._handle_posts, server)
+        #for server in ("creative", "survival", "pve"):
+        #    d = self._query(q='flair:'+server)
+        #    d.addCallback(self._handle_posts, server)
+        d = self._query()
+        d.addCallback(self._handle_posts)
 
-    def _handle_posts(self, response_data, server):
+    def _handle_posts(self, response_data):#, server):
         posts = []
         for post in response_data['data']['children']:
             data = post['data']
@@ -46,10 +48,12 @@ class RedditSource(Source):
                 'title': data['title'],
                 'author': data['author'],
                 'num_comments': data['num_comments'],
-                'permalink': 'http://www.reddit.com'+data['permalink']
+                'permalink': 'http://www.reddit.com'+data['permalink'],
+                'flair': data['link_flair_text']
             })
         posts = json.dumps(posts)
-        self.api_call("update_cache", key="REDDIT_"+server.upper()+"_POSTS", value=posts)
+        self.api_call("update_cache", key="REDDIT_POSTS", value=posts)
+        #self.api_call("update_cache", key="REDDIT_"+server.upper()+"_POSTS", value=posts)
 
 
 source = RedditSource

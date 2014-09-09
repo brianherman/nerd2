@@ -34,6 +34,8 @@
   <h3>community</h3>
   <ul class="community">
     {%- for post in subreddit %}
+    {%- if post.flair %}
+    {%- if post.flair.lower() == title %}
     <li>
       <span class="sr-content">
         <span class="title"><a href="{{ post.url }}">{{ post.title }}</a></span>
@@ -41,11 +43,13 @@
         <span class="comments">{{ post.num_comments }} <a href="{{ post.permalink }}">comments</a></span>
       </span>
     </li>
+    {%- endif %}
+    {%- endif %}
     {%- endfor %}
   </ul>
   {%- endif %}
   
-  {%- if github %}
+  {#%- if github %}
   <h3>issues</h3>
   <ul class="community">
     {%- for issue in github %}
@@ -58,7 +62,7 @@
     </li>
     {%- endfor %}
   </ul>
-  {%- endif %}
+  {%- endif %#}
   
   <h3 id="builds-header">builds</h3>
   
