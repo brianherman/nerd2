@@ -1,8 +1,8 @@
 from . import api
 from flask.ext.restful import Resource
 from flask.ext.restful.reqparse import RequestParser
-from www.models import db
-from www.models.cache import Cache
+from models import db
+from models.cache import Cache
 
 class UpdateCache(Resource):
     post_parser = RequestParser()

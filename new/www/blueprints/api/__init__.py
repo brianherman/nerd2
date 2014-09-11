@@ -1,6 +1,6 @@
-from www.app import app
+from flask import app
 from flask.ext.restful import Api
 
-api = Api(app, '/api')
+api = Api(prefix='/api')
 
 from . import cache, creation

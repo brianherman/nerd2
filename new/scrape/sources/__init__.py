@@ -8,11 +8,11 @@ class Source(object):
     def api_call(self, method, **kwargs):
         if method == "update_cache":
             payload = {'key': kwargs['key'], 'value': kwargs['value']}
-            requests.post('http://167.88.116.28:5000/api/update_cache', data=payload)
+            requests.post('http://107.161.23.181:5000/api/update_cache', data=payload)
         if method == "update_creation":
             payload = {'name': kwargs['name'], 'server': kwargs['server'],
                 'revision': kwargs['revision'], 'x': kwargs['x'], 'z': kwargs['z']}
-            requests.post('http://167.88.116.28:5000/api/update_creation', data=payload)
+            requests.post('http://107.161.23.181:5000/api/update_creation', data=payload)
 
 from scrape.sources import wiki, mumble, irc, mc_ping, top_players, reddit
 

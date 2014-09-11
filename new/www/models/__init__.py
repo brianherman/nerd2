@@ -1,6 +1,5 @@
-from www.app import app
 from flask.ext.sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 import creation, revision, cache

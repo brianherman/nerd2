@@ -1,8 +1,8 @@
 from . import api
 from flask.ext.restful import Resource
 from flask.ext.restful.reqparse import RequestParser
-from www.models import db
-from www.models.creation import Creation
+from models import db
+from models.creation import Creation
 
 class UpdateCreation(Resource):
     post_parser = RequestParser()

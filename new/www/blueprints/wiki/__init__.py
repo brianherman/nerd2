@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from www.models.cache import Cache
+from models.cache import Cache
 
 blueprint = Blueprint('wiki', __name__, template_folder='templates')
 
