@@ -73,14 +73,22 @@ a {
 #menu li {
     list-style-type: none;
     float:left; 
-    padding:0;
+    padding: 0;
 }
 #menu>li:not(:first-of-type) {
     margin-left: 50px;
 }
+#menu li:hover {
+    background-color: rgba(0,0,0,0.7);
+}
 #menu a {
+    height: 100%;
+    display: block;
     font-weight:bold;
-    padding:10px;
+    padding:0 10px;
+}
+#menu a:hover {
+    background: transparent;
 }
 #menu li ul {
     position: absolute;
@@ -96,7 +104,6 @@ a {
     float: none;
 }
 #menu li ul li a {
-    padding: 0 10px;
     width: 100%;
     display: block;
     box-sizing: border-box;
