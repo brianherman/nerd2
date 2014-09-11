@@ -6,6 +6,7 @@ html * {
 }
 
 body {
+    min-width:1080px;
     background: url(img/back5.png);
     font-family: 'Droid Sans', sans-serif;
     font-size:12px;
