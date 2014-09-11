@@ -1,0 +1,8 @@
+# Development Settings
+DEBUG=False
+DEBUG_SHELL=False
+HOST="127.0.0.1"
+PORT="5000"
+
+# Application Settings
+SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/nerd2.db"
