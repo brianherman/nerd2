@@ -25,6 +25,10 @@ def index():
         }
     )
 
+@blueprint.route('/community')
+def community():
+    return None #TODO
+
 @blueprint.route('/appeal')
 def appeal():
     return None #TODO

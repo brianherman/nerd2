@@ -24,21 +24,19 @@ a {
 /*** HEADER ***/
 
 #header h1 {
-    position:absolute;
-    left:17px;
-    top:17px;
-    background: url(img/logo2.png) no-repeat;
+    display: inline-block;
+    float: left;
+    background: url(img/logo2.png) no-repeat center left;
     padding-left:40px;
     /*border-right:1px solid #ccc;*/
-    height:43px;
+    height:72px;
+    line-height:72px;
     font-family: 'Crimson Text';
     font-weight: normal;
     text-transform: lowercase;
     font-size:2.2em;
-    padding-top:2px;
 }
 #header h1 a {
-    display:inline;
     padding:0;
 }
 #header h1 a:hover {
@@ -52,45 +50,61 @@ a {
     opacity:0.9;
 }
 #header a {
-    display:block;
     color: white;
 }
 #header a:hover {
     background-color:rgba(0,0,0,0.7);
 }
 #header-inner {
-    position:relative;
-    width:1080px;
+    width: 1080px;
     margin: 0 auto;
 }
 
 
 #menu {
-    position:absolute;
-    left:50%;
-    top:20px;
-    height:35px;   
+    display: inline-block;
+    height: 72px;
+    line-height: 72px;
+    float: left;
     margin:0; 
+    margin-left: 150px;
 }
 #menu li {
     list-style-type: none;
     float:left; 
-   position:relative;
-   right:50%;
-   padding:0;
+    padding:0;
+}
+#menu>li:not(:first-of-type) {
+    margin-left: 50px;
 }
 #menu a {
     font-weight:bold;
     padding:10px;
 }
-
-
+#menu li ul {
+    position: absolute;
+    line-height: 30px;
+    margin: 0;
+    background-color: rgba(0,0,0,0.7);
+    display: none;
+}
+#menu li:hover ul {
+    display: block;
+}
+#menu li ul li {
+    float: none;
+}
+#menu li ul li a {
+    padding: 0 10px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
 
 #server-status {
-    position:absolute;
+    float: right;
+    height: 72px;
     width:150px;
-    top:3px;
-    right:12px;
     border-collapse:collapse;
 }
 #server-status th {
