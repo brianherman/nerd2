@@ -46,7 +46,7 @@ class WikiSource(Source):
             page=page_name,
             prop='text')
 
-    def _get_text(self, *page_names):
+    def _get_text(self, section=None, *page_names):
         d0 = defer.Deferred()
 
         def _callback(response_data_old):
@@ -62,11 +62,19 @@ class WikiSource(Source):
         def _errback(e):
             d0.errback(e)
 
-        d1 = self._query(
-            action='query',
-            titles='|'.join(page_names),
-            prop='revisions',
-            rvprop='content')
+        if section:
+            d1 = self._query(
+                action='query',
+                titles='|'.join(page_names),
+                prop='revisions',
+                rvprop='content',
+                rvsection=section)
+        else:
+            d1 = self._query(
+                action='query',
+                titles='|'.join(page_names),
+                prop='revisions',
+                rvprop='content')
         d1.addCallbacks(_callback, _errback)
 
         return d0
@@ -120,15 +128,23 @@ class WikiSource(Source):
         d = self._get_html('Rules')
         d.addCallback(self._handle_rules)
 
+        ### Grab IRC (used for static IRC page)
+        d = self._get_html('IRC')
+        d.addCallback(self._handle_irc)
+
+        ### Grab IRC Quotes (used for community page)
+        d = self._get_text(8, 'Bestof')
+        d.addCallback(self._handle_quotes)
+
         ### Grab creations from Creative page
-        d = self._get_text("Creative")
+        d = self._get_text(None, "Creative")
         d.addCallback(self._handle_creative_creations)
 
         ### Grab current revisions
         pages = []
         for server in ("Creative", "Survival", "PvE"):
             pages.append("Template:Current %s map revision" % server)
-        d = self._get_text(*pages)
+        d = self._get_text(None, *pages)
         d.addCallback(self._handle_current_revisions)
 
         ### Grab usages of Template:Creation
@@ -162,6 +178,49 @@ class WikiSource(Source):
 
         ### Store in DB
         self.api_call("update_cache", key="HTML_RULES", value=html)
+
+    def _handle_irc(self, response_data):
+        html = response_data['parse']['text']['*']
+
+        ### Remove edit links
+        html = re.sub('<span class="editsection">.*?</span>', '', html)
+
+        ### Fix internal links
+        html = re.sub('<a href="/wiki/', '<a href="http://redditpublic.com/wiki/', html)
+
+        ### Change headers
+        def header_callback(match):
+            g = match.groups()
+            changes = {
+                "1": "3",
+                "3": "4",
+                "4": "5"
+            }
+            return '<%sh%s>' % (g[0], changes.get(g[1], g[1]))
+
+        html = re.sub('\<(\/?)h([0-9]{1})\>', header_callback, html)
+
+        ### Convert to UTF8
+        html = html.encode('utf8')
+
+        ### Store in DB
+        self.api_call("update_cache", key="HTML_IRC", value=html)
+
+    def _handle_quotes(self, response_data):
+        data = response_data[0]['text'].splitlines(True)
+
+        quotes = []
+        quote_text = ""
+        for line in data:
+            if line[0] == " ":
+                quote_text += "%s\n" % line.strip()
+            elif quote_text:
+                quotes.append(quote_text)
+                quote_text = ""
+
+        quotes = json.dumps(quotes)
+
+        self.api_call("update_cache", key="IRC_QUOTES", value=quotes)
 
     def _handle_current_revisions(self, response_data):
         current_revisions = {}
@@ -298,7 +357,7 @@ class WikiSource(Source):
 
         while len(pages):
             pages_current, pages = pages[:pp_content], pages[pp_content:]
-            d = self._get_text(*pages_current)
+            d = self._get_text(None, *pages_current)
             d.addCallback(_callback)
 
 

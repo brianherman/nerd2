@@ -1,4 +1,4 @@
-import config
+#import config
 
 import sys
 args = sys.argv[1:]
@@ -17,7 +17,7 @@ elif args[0] == 'www':
     #    use_evalex=("DEBUG_SHELL", True))
 elif args[0] == 'scrape':
     from scrape.app import app
-    app.config = config
+    #app.config = config
     app.run()
 else:
     print usage
