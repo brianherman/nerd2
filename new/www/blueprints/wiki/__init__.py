@@ -5,9 +5,10 @@ blueprint = Blueprint('wiki', __name__, template_folder='templates')
 
 @blueprint.route('/rules')
 def rules():
-    body = Cache.query.filter_by(key='HTML_RULES').first()
-    return render_template("wiki.html", body=body.value)
+    body = Cache.query.filter_by(key='HTML_RULES').first().value
+    return render_template("wiki.html", body=body, title='rules')
 
 @blueprint.route('/irc')
 def irc():
-    return None #TODO
+    body = Cache.query.filter_by(key='HTML_IRC').first().value
+    return render_template("wiki.html", body=body, title='irc')
