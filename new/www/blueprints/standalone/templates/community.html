@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block js %}
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='community.js') }}"></script>
+{% endblock %}
+{% block pagetitle %}
+  <h2 class="server server-community">
+    <span id="server-background-overlay">
+      <span id="server-text-wrapper"><span id="server-name">community</span></span>
+    </span>
+  </h2>
+{% endblock %}
+{% block content %}
+  <h3>forum</h3>
+  <ul class="community">
+    {%- for post in subreddit %}
+    <li>
+      <span class="sr-content">
+        <span class="title"><a href="{{ post.url }}">{{ post.title }}</a></span>
+      </span>
+    </li>
+    {%- endfor %}
+  </ul>
+
+  <h3>reddit</h3>
+  <a href="#" id="reddit-showhide">show/hide more posts</a></p>
+  <ul class="community" id="reddit-posts">
+    {%- for post in reddit_posts %}
+    <li>
+      <span class="sr-content">
+        <span class="title">{% if post.flair %}[{{ post.flair }}] {% endif %}<a href="{{ post.url }}">{{ post.title }}</a></span>
+        <span class="author"><a href="http://www.reddit.com/user/{{ post.author }}">{{ post.author }}</a></span>
+        <span class="comments">{{ post.num_comments }} <a href="{{ post.permalink }}">comments</a></span>
+      </span>
+    </li>
+    {%- endfor %}
+  </ul>
+
+  <h3>mumble</h3>
+  <p><strong>{{ mumble_online }}/{{ mumble_max }}</strong> talkative crafters online
+  <p>Join us at mumble.nerd.nu:6162. Need help? Check out the <a href="#">Mumble instructions</a>.</p>
+
+  <h3>irc</h3>
+  <p><strong>{{ irc_online }}</strong> people texting while crafting
+  <p>Join us at <a href="irc://irc.gamesurge.net/RedditMC">#RedditMC on irc.gamesurge.net</a>. Need help? Check out the <a href="{{ url_for('wiki.irc') }}">IRC instructions</a>.</p>
+  <h4>random quote</h4>
+  <blockquote>
+    <pre>{{ irc_quote }}</pre>
+  </blockquote>
+{% endblock %}

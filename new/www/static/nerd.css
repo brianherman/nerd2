@@ -15,7 +15,7 @@ body {
 a {
     color:#007dc6;
     text-decoration:none;
-    padding:2px;
+    padding:0 2px;
 }
 #content a:hover {
     color:white;
@@ -161,6 +161,7 @@ h2 {
     color:#444;
     font-weight:normal;
     text-transform:lowercase;
+    margin: 10px 0;
     padding:10px 0 10px 15px;
 }
 
@@ -173,6 +174,12 @@ h2.server {
 h2.server-creative { background-image: url(img/head-c.png); }
 h2.server-survival { background-image: url(img/head-s.png); }
 h2.server-pve      { background-image: url(img/head-p.png); }
+h2.server-community {
+    background-image: url(img/head-mumble.png);
+    background-position: 205px 20px;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+}
 div.index-server-creative { background-image: url(img/index-c.png); }
 div.index-server-survival { background-image: url(img/index-s.png); }
 div.index-server-pve      { background-image: url(img/index-p.png); }
@@ -208,6 +215,7 @@ div.index-server-text-wrapper {
 }
 div.index-server-text-wrapper h2 {
     padding:0;
+    margin: 0;
     margin-bottom:3px;
     font-size:1.7em;
     background-color:transparent;
@@ -315,6 +323,13 @@ h5 {
     font-size:1.3em;
     font-weight:normal;
     clear:left;
+}
+
+blockquote {
+  padding: 10px;
+  border-left: 5px solid #CCC;
+  margin-bottom: 24px;
+  background-color: #EEEEEE;
 }
 
 li {
