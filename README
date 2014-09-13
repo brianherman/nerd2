@@ -9,13 +9,13 @@ Dependencies:
 
 
 Scrapers:
- - forums
-   - recent topics (via RSS)
+ - forums [DONE]
+   - recent topics (via RSS) [DONE]
  - survival-specific
    - bounties
    - leaderboards
  - usage stats [IMPR]
- - staff
+ - staff [DONE]
  - minecraft client
  - minecraft ping [IMPR]
  - subreddit [DONE]
