@@ -52,4 +52,5 @@ class MumbleSource(Source):
             key="MUMBLE_USERS_MAX",
             value=d['users_max'])
 
+
 source = MumbleSource

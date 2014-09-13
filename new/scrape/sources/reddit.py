@@ -1,6 +1,5 @@
 import json
 import urllib
-import math
 
 from twisted.internet import defer, task
 from twisted.web import client
@@ -33,13 +32,10 @@ class RedditSource(Source):
         task.LoopingCall(self.update).start(60*60*2)
 
     def update(self):
-        #for server in ("creative", "survival", "pve"):
-        #    d = self._query(q='flair:'+server)
-        #    d.addCallback(self._handle_posts, server)
         d = self._query()
         d.addCallback(self._handle_posts)
 
-    def _handle_posts(self, response_data):#, server):
+    def _handle_posts(self, response_data):
         posts = []
         for post in response_data['data']['children']:
             data = post['data']
@@ -53,7 +49,6 @@ class RedditSource(Source):
             })
         posts = json.dumps(posts)
         self.api_call("update_cache", key="REDDIT_POSTS", value=posts)
-        #self.api_call("update_cache", key="REDDIT_"+server.upper()+"_POSTS", value=posts)
 
 
 source = RedditSource

@@ -356,15 +356,4 @@ class WikiSource(Source):
             d.addCallback(_callback)
 
 
-    """def _handle_servers(self, result_list):
-        for success, result in result_list:
-            request_data, response_data = result
-            html = response_data['parse']['text']['*']
-            print "="*50
-            print request_data['page']
-            print html.encode('utf8')
-
-        #import pprint
-        #pprint.pprint(result)"""
-
 source = WikiSource

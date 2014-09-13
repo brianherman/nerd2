@@ -6,6 +6,7 @@ from twisted.protocols.basic import LineReceiver
 
 from scrape.sources import Source
 
+
 class IRCProtocol(LineReceiver):
     def connectionMade(self):
         self.sendLine("NICK FooBot")
@@ -32,7 +33,6 @@ class IRCProtocol(LineReceiver):
             self.transport.loseConnection()
 
 
-
 class IRCFactory(ClientFactory):
     protocol = IRCProtocol
 
@@ -40,6 +40,7 @@ class IRCFactory(ClientFactory):
 class IRCSource(Source):
     def start(self):
         task.LoopingCall(self.update).start(10*60)
+
     def update(self):
         factory = IRCFactory()
         factory.got_users = self.got_users
@@ -49,5 +50,6 @@ class IRCSource(Source):
         self.api_call("update_cache",
             key="IRC_USERS_CURRENT",
             value=count)
+
 
 source = IRCSource

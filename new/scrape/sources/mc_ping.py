@@ -1,10 +1,10 @@
-
 import json
 
 from twisted.internet import reactor, task
 from twisted.internet.protocol import ClientFactory, Protocol
 
 from scrape.sources import Source
+
 
 class MinecraftPingProtocol(Protocol):
     buf = ""
@@ -63,5 +63,6 @@ class MinecraftPingSource(Source):
         self.api_call("update_cache",
             key="MC_"+server+"_USERS_MAX",
             value=data['players']['max'])
+
 
 source = MinecraftPingSource
