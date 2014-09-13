@@ -3,6 +3,7 @@ Domain (to buy): mcpublic.net? let me know as soon as this is done and what the 
 
 Dependencies:
  - python 2.7
+ - pls use requirements.txt nao
  - flask
  - github3.py
 
@@ -22,7 +23,7 @@ Scrapers:
    - creations [IMPR]
    - rules [DONE]
    - current revs [DONE]
- - irc quotes
+ - irc quotes [DONE]
  - mumble [DONE]
  - irc [DONE]
 
