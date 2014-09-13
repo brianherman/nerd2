@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block js %}
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery.minecraftskin.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script>
+{% endblock %}
+{% block css %}
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='player.css') }}"/>
+{% endblock %}
+{% block precontent %}
+  <div id="player">
+    <span class="mc-skin" data-minecraft-username="{{ username }}"></span>
+    <div id="shadow"></div>
+    <div id="player-inner">
+      <h2><span id="player-name">{{ username }}</span></h2>
+      
+
+
+      online in pve|creative
+      
+      for each server:
+        12h played in last week (if in top 1000)
+      
+      
+      (split these by checking world/players)
+      creative:
+        creations: possible "project lead"
+        check-ins: e.g. "Argoth [6 hours ago]
+      
+      survival:
+        clan listing
+        recent kills
+        most killed
+        most killed by
+        favourite weapon
+      
+      pve:
+        same as c.
+    </div>
+  </div>
+{% endblock %}
+{% block pagetitle %}{% endblock %}
+{% block content %}{% endblock %}

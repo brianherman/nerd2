@@ -1,3 +1,3 @@
 $(document).ready(function(){
-    draw_model('model', 'scratch', $('#player-name').text(), 5, true);
+    $(".mc-skin").minecraftSkin({scale: 5, hat: true});
 });
