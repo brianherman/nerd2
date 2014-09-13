@@ -33,7 +33,6 @@ class WikiSource(Source):
         args = {'format': 'json'}
         args.update(request_data)
         url = 'http://redditpublic.com/api.php?' + urllib.urlencode(args)
-        #print url
 
         d1 = client.getPage(url)
         d1.addCallbacks(_callback, _errback)
@@ -51,7 +50,6 @@ class WikiSource(Source):
 
         def _callback(response_data_old):
             response_data = response_data_old['query']['pages'].values()
-            #print response_data
             for p in response_data:
                 try:
                     p['text'] = p['revisions'][0]['*']
@@ -80,7 +78,6 @@ class WikiSource(Source):
         return d0
 
     def _get_usages(self, template_name, token=None):
-        #print token
         pp_ei = 50
 
         d0 = defer.Deferred()
@@ -91,7 +88,6 @@ class WikiSource(Source):
                 pages.append(p['title'].encode('utf8'))
 
             if 'query-continue' in response_data:
-                #print "looping"
                 def _callback_accumulate(more_pages):
                     d0.callback(pages + more_pages)
 
@@ -99,7 +95,6 @@ class WikiSource(Source):
                 d1 = self._get_usages(template_name, token)
                 d1.addCallback(_callback_accumulate)
             else:
-                #print "firing"
                 # Fire off the chain of deferreds
                 d0.callback(pages)
 
@@ -191,11 +186,7 @@ class WikiSource(Source):
         ### Change headers
         def header_callback(match):
             g = match.groups()
-            changes = {
-                "1": "3",
-                "3": "4",
-                "4": "5"
-            }
+            changes = {"2": "3"}
             return '<%sh%s>' % (g[0], changes.get(g[1], g[1]))
 
         html = re.sub('\<(\/?)h([0-9]{1})\>', header_callback, html)
@@ -240,7 +231,7 @@ class WikiSource(Source):
         pages = []
         for r in range(7, current_revisions['PVE']+1):
             pages.append("Template:PvE r%d" % r)
-        d = self._get_text(*pages)
+        d = self._get_text(None, *pages)
         d.addCallback(self._handle_pve_creations)
 
     def _handle_creative_creations(self, response_data):
@@ -296,25 +287,28 @@ class WikiSource(Source):
                                 server = 'survival'
                             elif server == 'P':
                                 server = 'pve'
+
                             found_carto_template = True
                             carto_data = dict((d.split('=') for d in carto_data.split("|")))
                             if 'r' in carto_data \
                                     and 'x' in carto_data \
                                     and 'z' in carto_data:
-                                #print "adding"
+
+                                if server == 'pve' and int(carto_data['r']) > 6:
+                                    continue
+
                                 self._update_creation(
                                     title,
                                     server,
                                     int(carto_data['r']),
                                     int(carto_data['x']),
                                     int(carto_data['z'])
-                            )
+                                )
                         if not found_carto_template:
-
                             try:
-                                revision = int(args.get('map_revision', None))
+                                revision = int(args.get('map revision', None))
                             except:
-                                revision = 0
+                                continue
 
                             server = args.get('server', '')\
                                 .replace('[', '')\
@@ -329,29 +323,30 @@ class WikiSource(Source):
                                 elif server == 'p':
                                     server = 'pve'
                                 else:
-                                    server = server[0]
+                                    server = server
                             else:
-                                server = 'unknown'
+                                continue
+
+                            if server == 'pve' and revision > 6:
+                                continue
 
                             coords = re.findall('-?\d+', args['coordinates'])
 
-                            # pop y coord
                             if len(coords) == 3:
                                 coords.pop(1)
 
                             if len(coords) == 2:
                                 coords = (int(coords[0]), int(coords[1]))
                             else:
-                                coords = [0,0]
+                                continue
 
-                            if revision and server and coords:
-                                self._update_creation(
-                                    title,
-                                    server,
-                                    revision,
-                                    coords[0],
-                                    coords[1]
-                                )
+                            self._update_creation(
+                                title,
+                                server,
+                                revision,
+                                coords[0],
+                                coords[1]
+                            )
 
         pp_content = 50
 
