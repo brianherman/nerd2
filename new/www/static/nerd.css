@@ -78,14 +78,15 @@ a {
 #menu>li:not(:first-of-type) {
     margin-left: 50px;
 }
-#menu li:hover {
+#menu li:hover>a, #menu li ul li:hover {
     background-color: rgba(0,0,0,0.7);
 }
 #menu a {
-    height: 100%;
-    display: block;
     font-weight:bold;
     padding:0 10px;
+}
+#menu>li>a {
+    padding: 10px;
 }
 #menu a:hover {
     background: transparent;
