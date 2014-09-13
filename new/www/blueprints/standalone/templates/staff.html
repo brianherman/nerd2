@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block js %}
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery.minecraftskin.js') }}"></script>
+  {#<script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script>#}
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $(".mc-skin").minecraftSkin({scale: 2, hat: false, draw: 'head'});
+    });
+  </script>
+{% endblock %}
+{% block css %}
+  <style>
+    .scratch {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+{% macro faces(mode, role) %}
+  <ul class="playerlist{{ mode }}">
+    {%- for p in staff_list[role] %}
+    <li>
+      <a href="{{ url_for('player.player', username=p) }}">
+        <span class="mc-skin" data-minecraft-username="{{ p }}"></span>
+        <span>{{ p }}</span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+{% endmacro %}
+{% macro im_faces(mode) %}
+  {%- for p,t in staff_list['In Memoriam'].iteritems() %}
+  <ul class="playerlist{{ mode }}">
+    <li>
+      <a href="{{ url_for('player.player', username=p) }}">
+        <span class="mc-skin" data-minecraft-username="{{ p }}"></span>
+        <span>{{ p }}</span>
+      </a>
+    </li>
+  </ul>
+  <p style="clear: both">{{ t }}</p>
+  {%- endfor %}
+{% endmacro %}
+
+{% block content %}
+  <h3>Head Admins</h3>
+  <p>These guys manage policy and rules and come up with ideas and manage staff relations and generally be bossy.</p>
+  {{ faces(1, 'Head Admins') }}
+  
+  <h3>Technical Admins</h3>
+  <p>These guys keep the server up and running. Manage plugins and other server stuff.</p>
+  {{ faces(1, 'Technical Admins') }}
+  
+  <h3>Server Admins</h3>
+  <p>These guys have the full range of in-game powers on a specific server.</p>
+  
+  <h4>Creative</h4>
+  {{ faces(1, 'Creative Admins') }}
+  
+  <h4>Survival</h4>
+  {{ faces(1, 'Survival Admins') }}
+  
+  <h4>PvE</h4>
+  {{ faces(1, 'PVE Admins') }}
+  
+  <h3>Moderators</h3>
+  {{ faces(2, 'Moderators') }}
+  
+  <h3>Inactive Mods</h3>
+  {{ faces(2, 'Inactive Moderators') }}
+  
+  <h3>Past Mods</h3>
+  {{ faces(2, 'Past Moderators') }}
+
+  <h3>In Memoriam</h3>
+  <p>These staff members meant a lot to the community, but unfortunately have passed on from this life.</p>
+  <blockquote>And the game was over and the player woke up from the dream. And the player began a new dream. And the player dreamed again, dreamed better. And the player was the universe. And the player was love.</blockquote>
+  {{ im_faces(2) }}
+
+{% endblock %}

@@ -361,6 +361,9 @@ ul.playerlist1 img {
 ul.playerlist1 a, ul.playerlist2 a {
     background-color:white !important;
 }
+ul.playerlist1 a:hover, ul.playerlist2 a:hover {
+    color: #0000C6 !important;
+}
 
 
 ul.playerlist2 {
@@ -386,7 +389,10 @@ ul.playerlist2 span {
     display:inline;
     line-height:48px;
     margin-left:10px;
-    vertical-align:center;
+    vertical-align:middle;
+}
+ul.playerlist2 canvas {
+    vertical-align: middle;
 }
 
 

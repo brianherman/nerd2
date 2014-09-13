@@ -46,6 +46,7 @@ def community():
     irc_quote = random.choice(irc_quotes)
 
     return render_template('community.html',
+        title = 'community',
         forum_posts = forum_posts,
         reddit_posts = reddit_posts,
         mumble_online = mumble_online,
@@ -60,4 +61,6 @@ def appeal():
 
 @blueprint.route('/staff')
 def staff():
-    return None #TODO
+    staff_list = json.loads(Cache.query.filter_by(key='STAFF_LIST').first().value)
+
+    return render_template('staff.html', title = 'staff', staff_list = staff_list)
