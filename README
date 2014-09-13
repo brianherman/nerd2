@@ -14,13 +14,14 @@ Scrapers:
  - survival-specific
    - bounties
    - leaderboards
- - usage stats
+ - usage stats [IMPR]
  - staff
  - minecraft client
  - minecraft ping [IMPR]
  - subreddit [DONE]
- - wiki [IMPR]
-   - creations [IMPR]
+ - forums [DONE]
+ - wiki [DONE]
+   - creations [DONE]
    - rules [DONE]
    - current revs [DONE]
  - irc quotes [DONE]

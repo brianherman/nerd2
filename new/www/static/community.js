@@ -3,5 +3,10 @@ $(document).ready(function(){
        $('ul#reddit-posts li').slice(5).toggle();
        return false;
     });
-    $("ul.community li").slice(5).hide();
+    $("#forum-showhide").click(function () {
+       $('ul#forum-posts li').slice(5).toggle();
+       return false;
+    });
+    $("ul#reddit-posts li").slice(3).hide();
+    $("ul#forum-posts li").slice(3).hide();
 });

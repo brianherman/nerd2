@@ -7,3 +7,4 @@ Twisted==14.0.0
 requests==2.4.1
 pyOpenSSL==0.14
 service_identity==14.0.0
+feedparser==5.1.3

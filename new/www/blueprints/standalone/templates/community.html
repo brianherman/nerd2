@@ -12,8 +12,9 @@
 {% endblock %}
 {% block content %}
   <h3>forum</h3>
-  <ul class="community">
-    {%- for post in subreddit %}
+  <a href="#" id="forum-showhide">show/hide more posts</a></p>
+  <ul class="community" id="forum-posts">
+    {%- for post in forum_posts %}
     <li>
       <span class="sr-content">
         <span class="title"><a href="{{ post.url }}">{{ post.title }}</a></span>

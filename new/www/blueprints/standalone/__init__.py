@@ -30,6 +30,9 @@ def index():
 
 @blueprint.route('/community')
 def community():
+    ### Forums
+    forum_posts = json.loads(Cache.query.filter_by(key='FORUM_POSTS').first().value)
+
     ### Reddit
     reddit_posts = json.loads(Cache.query.filter_by(key='REDDIT_POSTS').first().value)
 
@@ -43,7 +46,7 @@ def community():
     irc_quote = random.choice(irc_quotes)
 
     return render_template('community.html',
-        forum_posts = None,
+        forum_posts = forum_posts,
         reddit_posts = reddit_posts,
         mumble_online = mumble_online,
         mumble_max = mumble_max,
