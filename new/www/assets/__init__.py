@@ -1,12 +1,14 @@
 from flask.ext.assets import Environment, Bundle
+from webassets.filter import get_filter
 
 def init_assets(application):
     assets = Environment(application)
+    assets.config['SASS_BIN'] = "/usr/local/bin/sass"
     assets.load_path = ["assets/"]
     assets.url = "/static"
 
     css_main = Bundle('sass/app.scss',
-                      filters='scss,cssmin',
+                      filters=('scss,cssmin'),
                       depends=('sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'),
                       output='css/gen/app.%(version)s.css')
     assets.register('css_main', css_main)
