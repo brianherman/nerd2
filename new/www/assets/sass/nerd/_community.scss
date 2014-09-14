@@ -26,7 +26,8 @@
         }
       }
       .comments:before {
-        content: '\2022  ';
+        content: '\2022';
+        margin-right: 5px;
       }
     }
   }
