@@ -4,9 +4,9 @@
   height: 300px;
   margin: 0;
   padding: 0;
-  &.index-server-creative { background-image: url(/static/img/index-c.png); }
-  &.index-server-survival { background-image: url(/static/img/index-s.png); }
-  &.index-server-pve      { background-image: url(/static/img/index-p.png); }
+  &.index-server-creative { background-image: url("/static/img/index-c.png"); }
+  &.index-server-survival { background-image: url("/static/img/index-s.png"); }
+  &.index-server-pve      { background-image: url("/static/img/index-p.png"); }
   a {
     margin: -3px;
     padding: 3px;

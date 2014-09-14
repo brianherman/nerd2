@@ -2,12 +2,12 @@
   height: 200px;
   margin-bottom: 30px;
   padding: 0;
-  &.server-creative { background-image: url(/static/img/head-c.png); }
-  &.server-survival { background-image: url(/static/img/head-s.png); }
-  &.server-pve      { background-image: url(/static/img/head-p.png); }
+  &.server-creative { background-image: url("/static/img/server-c.png"); }
+  &.server-survival { background-image: url("/static/img/server-s.png"); }
+  &.server-pve      { background-image: url("/static/img/server-p.png"); }
   &.server-community {
     background-color: #ffffff;
-    background-image: url(/static/img/head-mumble.png);
+    background-image: url("/static/img/server-cm.png");
     background-repeat: no-repeat;
     background-position: 205px 20px;
   }
@@ -34,10 +34,6 @@ img.usage {
   display: block;
   margin: 0 auto;
 }
-
-#server-c { background-image: url(/static/img/c-icon.png); }
-#server-s { background-image: url(/static/img/s-icon.png); }
-#server-p { background-image: url(/static/img/p-icon.png); }
 
 @import
   "_index",
