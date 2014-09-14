@@ -45,24 +45,49 @@ class MinecraftPingProtocol(Protocol):
 class MinecraftPingFactory(ClientFactory):
     protocol = MinecraftPingProtocol
 
+    def __init__(self, source, server_name):
+        self.source = source
+        self.server_name = server_name
+        self.timeout = reactor.callLater(20, self.timed_out)
+
+    def timed_out(self):
+        self.source.server_down(self.server_name)
+
+    def got_data(self, data):
+        if self.timeout.active():
+            self.timeout.cancel()
+        self.source.server_up(self.server_name, data)
+
+
 
 class MinecraftPingSource(Source):
     def start(self):
-        task.LoopingCall(self.update).start(15)
+        task.LoopingCall(self.update).start(30)
 
     def update(self):
-        for server in [("CREATIVE", "c.nerd.nu"), ("SURVIVAL", "s.nerd.nu"), ("PVE", "p.nerd.nu")]:
-            factory = MinecraftPingFactory()
-            factory.got_data = lambda d, server=server[0]: self.got_data(d, server)
-            reactor.connectTCP(server[1], 25565, factory)
+        servers = [
+            ("creative", "c.nerd.nu"),
+            ("survival", "s.nerd.nu"),
+            ("pve", "p.nerd.nu")
+        ]
+        for server_name, server_addr in servers:
+            factory = MinecraftPingFactory(self, server_name.upper())
+            reactor.connectTCP(server_addr, 25565, factory)
 
-    def got_data(self, data, server):
+    def server_up(self, server, data):
         self.api_call("update_cache",
-            key="MC_"+server+"_USERS_CURRENT",
+            key = "MC_%s_STATUS" % server,
+            value="online")
+        self.api_call("update_cache",
+            key="MC_%s_USERS_CURRENT" % server,
             value=data['players']['online'])
         self.api_call("update_cache",
-            key="MC_"+server+"_USERS_MAX",
+            key="MC_%s_USERS_MAX" % server,
             value=data['players']['max'])
 
+    def server_down(self, server):
+        self.api_call("update_cache",
+            key = "MC_%s_STATUS" % server,
+            value="offline")
 
 source = MinecraftPingSource
