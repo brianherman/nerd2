@@ -2,3 +2,4 @@
 .webassets-cache/
 gen/
 config.py
+.idea
