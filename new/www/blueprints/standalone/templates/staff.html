@@ -27,7 +27,7 @@
   <ul class="playerlist{{ mode }}">
     <li>
       <a href="{{ url_for('player.player', username=p) }}">
-        <span class="mc-skin" data-minecraft-username="{{ p }}"></span>
+        <span class="mc-skin-{{ mode }}" data-minecraft-username="{{ p }}"></span>
         <span>{{ p }}</span>
       </a>
     </li>
