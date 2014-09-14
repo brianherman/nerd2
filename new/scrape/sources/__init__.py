@@ -14,9 +14,11 @@ class Source(object):
             payload = {'name': kwargs['name'], 'server': kwargs['server'],
                 'revision': kwargs['revision'], 'x': kwargs['x'], 'z': kwargs['z']}
             requests.post(self.config.API_URL+'update_creation', data=payload)
+        if method == "update_modreqs":
+            requests.post(self.config.API_URL+'update_modreqs', data=kwargs)
 
 
-import wiki, mumble, irc, mc_ping, top_players, reddit, forums, staff
+import wiki, mumble, irc, mc_ping, top_players, reddit, forums, staff, modreq
 
 source_packages = [
     wiki,
@@ -26,7 +28,8 @@ source_packages = [
     top_players,
     reddit,
     forums,
-    staff
+    staff,
+    modreq
 ]
 
 sources = [p.source for p in source_packages]
