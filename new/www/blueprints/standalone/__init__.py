@@ -67,8 +67,6 @@ def appeal():
             for detail in details['data']:
                 if detail['server'] == 'c.nerd.nu':
                     return redirect('https://nerd.nu/forums/index.php?app=forums&module=post&section=post&do=new_post&f=12&title=%s+[%s]' % (detail['username'], detail['issuer']))
-                else:
-                    flash('%s is not banned from our servers!' % username)
             flash('%s is not banned from our servers!' % username)
         else:
             flash('Please enter a valid Minecraft username!')
