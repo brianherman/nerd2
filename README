@@ -1,11 +1,10 @@
-Website IP: 107.161.23.181
-Domain (to buy): mcpublic.net? let me know as soon as this is done and what the domain is.
+Website IP: 107.161.23.181 
+(protected against up to 10Gbps or ~2 million PPS for a wide array of TCP and UDP attacks via a GRE tunnel from Staminus)
+Domain: mcpublic.net
 
 Dependencies:
  - python 2.7
- - pls use requirements.txt nao
- - flask
- - github3.py
+ - requirements.txt
 
 
 Scrapers:
