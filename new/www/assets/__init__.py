@@ -15,8 +15,7 @@ def init_assets(application):
 
     js_base = Bundle('js/vendor/excanvas.js',
                      'js/vendor/jquery-1.11.1.js',
-                     'js/vendor/jquery.minecraftskin.js',
-                     'js/vendor/highcharts.src.js')
+                     'js/vendor/jquery.minecraftskin.js')
     js_main = Bundle(js_base,
                      filters='rjsmin',
                      output='js/gen/app.%(version)s.js')
