@@ -6,9 +6,7 @@ from twisted.internet import defer, task
 from twisted.web import client
 client.HTTPClientFactory.noisy = False
 
-from scrape.sources import Source
-
-
+from sources import Source
 
 
 class WikiSource(Source):

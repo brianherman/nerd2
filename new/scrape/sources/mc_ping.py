@@ -3,7 +3,7 @@ import json
 from twisted.internet import reactor, task
 from twisted.internet.protocol import ClientFactory, Protocol
 
-from scrape.sources import Source
+from sources import Source
 
 
 class MinecraftPingProtocol(Protocol):

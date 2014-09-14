@@ -3,7 +3,8 @@ import struct
 from twisted.internet import reactor, task
 from twisted.internet.protocol import DatagramProtocol
 
-from scrape.sources import Source
+from sources import Source
+
 
 class MumbleProtocol(DatagramProtocol):
     buff = ""

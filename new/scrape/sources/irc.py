@@ -4,7 +4,7 @@ from twisted.internet import reactor, task
 from twisted.internet.protocol import ClientFactory
 from twisted.protocols.basic import LineReceiver
 
-from scrape.sources import Source
+from sources import Source
 
 
 class IRCProtocol(LineReceiver):
