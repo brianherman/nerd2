@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, request, redirect, flash
 from models.cache import Cache
+from bouncer import MCBouncer
 import json
 import random
+import re
 
 blueprint = Blueprint('standalone', __name__, template_folder='templates')
 
@@ -55,9 +57,24 @@ def community():
         irc_quote = irc_quote
     )
 
-@blueprint.route('/appeal')
+@blueprint.route('/appeal', methods=['GET','POST'])
 def appeal():
-    return None #TODO
+    mcb = MCBouncer('00459b780f103c14acad1b47f829f235')
+    if request.method == 'POST':
+        username = request.form['username']
+        if re.match('^[0-9A-Za-z_]{1,16}$', username):
+            details = mcb.getBans(username, '0', '1000')
+            for detail in details['data']:
+                if detail['server'] == 'c.nerd.nu':
+                    return redirect('https://nerd.nu/forums/index.php?app=forums&module=post&section=post&do=new_post&f=12&title=%s+[%s]' % (detail['username'], detail['issuer']))
+                else:
+                    flash('%s is not banned from our servers!' % username)
+            flash('%s is not banned from our servers!' % username)
+        else:
+            flash('Please enter a valid Minecraft username!')
+
+    return render_template('appeal.html', title='appeal')
+
 
 @blueprint.route('/staff')
 def staff():
