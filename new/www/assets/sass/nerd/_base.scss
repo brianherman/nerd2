@@ -31,11 +31,10 @@ body {
 .wikihtml #toc { display: none; }
 
 // Imports
-@import
-  "elements/_base",
-  "header/_base",
-  "_content",
-  "_footer",
-  "servers/_base",
-  "players/_base",
-  "_community";
+@import "elements/_base";
+@import "header/_base";
+@import "_content";
+@import "_footer";
+@import "servers/_base";
+@import "players/_base";
+@import "_community";
