@@ -1,26 +1,31 @@
 from flask import render_template
 from models.cache import Cache
 
-def init_app(application):
+def init_utils(application):
 
     @application.context_processor
     def inject_servers():
         server_names = ['creative', 'survival', 'pve']
         return dict(server_names=server_names)
 
-
     @application.context_processor
     def utility_processor():
         def get_status(server):
-            return True
+            status = Cache.query.filter_by(
+                key="MC_%s_STATUS" % server.upper()
+            ).first().value
+            if status == 'offline':
+                return False
+            elif status == 'online':
+                return True
         def get_players(server):
             current = Cache.query.filter_by(
-                key="MC_"+server.upper()+"_USERS_CURRENT"
+                key="MC_%s_USERS_CURRENT" % server.upper()
             ).first().value
             max = Cache.query.filter_by(
-                key="MC_"+server.upper()+"_USERS_MAX"
+                key="MC_%s_USERS_MAX" % server.upper()
             ).first().value
-            return current+'/'+max
+            return "%s/%s" % (current, max)
         return dict(
             get_players=get_players,
             get_status=get_status)
