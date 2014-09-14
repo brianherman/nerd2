@@ -1,0 +1,30 @@
+h2, h3, h4, h5 {
+  clear: left;
+  text-transform: lowercase;
+  font-family: 'Arvo', serif;
+  font-weight: normal;
+}
+
+h2 {
+  display: block;
+  padding: 10px 0 10px 15px;
+  font-size: 2em;
+  background-color: #f0f0f0;
+  color: #444;
+}
+h3 {
+  display: block;
+  margin: 20px 0 20px -15px;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  line-height: 1.2em;
+  font-size: 1.9em;
+}
+h4 {
+  margin: 16px 0 8px 0;
+  font-size: 1.5em;
+}
+h5 {
+  margin: 8px 0 4px 0;
+  font-size: 1.3em;
+}

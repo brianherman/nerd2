@@ -29,7 +29,7 @@ function loadRevision(rev) {
     
     
     $.getJSON('/api/get_creations?server='+$('#server-name').text()+'&revision='+rev, function(data) {
-        var list = $('<ul class="builds-1" />');
+        var list = $('<ul class="builds" />');
         $.each(data, function(i, v) {
             var inner = $('<li><a class="builds-wiki" href="http://redditpublic.com/wiki/' + v['name'] + '">'+ v['name'] + '</a></li>');
             inner.append('<a class="builds-carto" href="' +

@@ -1,13 +1,6 @@
 {% extends "base.html" %}
 {% block js %}
-  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.2.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='jquery.minecraftskin.js') }}"></script>
-  {#<script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script>#}
-  <script type="text/javascript">
-    $(document).ready(function(){
-        $(".mc-skin").minecraftSkin({scale: 2, hat: false, draw: 'head'});
-    });
-  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/staff.js') }}"></script>
 {% endblock %}
 {% block css %}
   <style>
@@ -22,7 +15,7 @@
     {%- for p in staff_list[role] %}
     <li>
       <a href="{{ url_for('player.player', username=p) }}">
-        <span class="mc-skin" data-minecraft-username="{{ p }}"></span>
+        <span class="mc-skin-{{ mode }}" data-minecraft-username="{{ p }}"></span>
         <span>{{ p }}</span>
       </a>
     </li>

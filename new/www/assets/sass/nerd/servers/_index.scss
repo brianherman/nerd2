@@ -1,0 +1,45 @@
+
+.index-server {
+  clear: left;
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  &.index-server-creative { background-image: url(/static/img/index-c.png); }
+  &.index-server-survival { background-image: url(/static/img/index-s.png); }
+  &.index-server-pve      { background-image: url(/static/img/index-p.png); }
+  a {
+    margin: -3px;
+    padding: 3px;
+    color: white;
+    &:hover {
+      color: white !important;
+      background-color: rgba(0,0,0,0.4) !important;
+    }
+  }
+  .index-server-background-overlay {
+    height: 290px;
+    width: 960px;
+    border-bottom: 10px solid rgba(0,0,0,0.4);
+    .index-server-text-wrapper {
+      float: left;
+      clear: left;
+      width: 200px;
+      margin: 10px 0 0 10px;
+      padding: 10px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      h2 {
+        margin: 0;
+        margin-bottom: 3px;
+        padding: 0;
+        font-size: 1.7em;
+        border-width: 0;
+        background-color: transparent;
+        color: white;
+      }
+      p {
+        padding-bottom: 3px;
+      }
+    }
+  }
+}

@@ -3,15 +3,16 @@
   <head>
     <title>Reddit Public Minecraft{% if title %} :: {{ title }}{% endif %}</title>
     <link type="image/png" rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='normalize.min.css') }}"/>
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nerd.css') }}"/>
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text">
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arvo:400,400italic">
-    {%- block css %}{% endblock %}
+    {%- assets "css_main" %}
+    <link type="text/css" rel="stylesheet" href="{{ ASSET_URL }}"/>
+    {%- endassets %}
     <!--[if lt IE 9]>
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ie.css') }}" />
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ie.css') }}" />
     <![endif]-->
+    {%- block css %}{% endblock %}
+    {%- assets "js_main" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
     {%- block js %}{% endblock %}
   </head>
   <body>

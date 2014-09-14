@@ -1,0 +1,41 @@
+// Base elements
+@import url("https://fonts.googleapis.com/css?family=Crimson+Text|Droid+Sans:400,700|Arvo:400,400italic");
+
+html * {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+body {
+    min-width: 1024px;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 12px;
+    background: url(/static/img/back5.png);
+    color: #333;
+}
+
+#flashes {
+  margin: 0;
+  padding: 0;
+  li {
+    display: block;
+    width: 980px;
+    margin: 0 auto;
+    padding: 10px;
+    list-style-type: none;
+    background: #CEE5F5; 
+    border: 1px solid #AACBE2;
+  }
+}
+
+.wikihtml #toc { display: none; }
+
+// Imports
+@import
+  "elements/_base",
+  "header/_base",
+  "_content",
+  "_footer",
+  "servers/_base",
+  "_players",
+  "_community";

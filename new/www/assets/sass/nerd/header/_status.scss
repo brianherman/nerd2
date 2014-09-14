@@ -1,0 +1,27 @@
+#header #header-inner #server-status {
+  float: right;
+  height: 72px;
+  width: 150px;
+  border-collapse: collapse;
+  th {
+    text-align: left;
+    a {
+      display: block;
+      height: 14px;
+      width: 100%;
+      padding: 2px 4px;
+    }
+  }
+  td span {
+    display: block;
+    float: right;
+    height: 12px;
+    width: 75px;
+    padding: 3px;
+    font-size: 0.8em;
+    text-align: center;
+    //font-variant: small-caps;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(0,0,0,0.4);
+  }
+}

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block js %}
-  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.2.min.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='server.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/server.js') }}"></script>
 {% endblock %}
 {% block pagetitle %}
   <h2 class="server server-{{ title }}">
@@ -69,11 +68,13 @@
   <span id="current-rev">{{ current_rev }}</span>
 
   <span id="rev-label">pick a revision</span>
-  <ol id="rev-list">
-    {%- for i in range(1, current_rev+1) %}
-    <li><a href="#" id="label-rev-{{ i }}"{% if i==current_rev %} class="selected"{% endif %}>{{ i }}</a></li>
-    {%- endfor %}
-  </ol>
+  <div id="rev-list">
+    <ol id="rev-list">
+      {%- for i in range(1, current_rev+1) %}
+      <li><a href="#" id="label-rev-{{ i }}"{% if i==current_rev %} class="selected"{% endif %}>{{ i }}</a></li>
+      {%- endfor %}
+    </ol>
+  </div>
 
   <!-- the following data is filled in at run-time by js -->
   <span id="build-links">

@@ -1,0 +1,66 @@
+.playerlist1 {
+  margin: 0;
+  padding: 0;
+  li {
+    float: left;
+    margin: 10px 10px 30px 10px;
+    padding: 5px 5px 10px 5px;
+    text-align: center;
+    list-style-type: none;
+    border-bottom: 4px solid #eee;
+    &:hover {
+      border-color: #ccc;
+    }
+    a {
+      background-color: white !important;
+      &:hover {
+        color: #0000C6 !important;
+      }
+    }
+  }
+}
+
+.playerlist2 {
+  margin-left: 25px;
+  li {
+    float: left;
+    width: 176px;
+    margin: 10px 15px;
+    padding: 5px;
+    list-style-type: none;
+    border: 1px solid #ddd;
+    &:hover {
+      border-color: #ccc;
+    }
+    a {
+      background-color: white !important;
+      &:hover {
+        color: #0000C6 !important;
+      }
+    }
+    span {
+      line-height: 48px;
+      margin-left: 10px;
+      canvas {
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// some old thing idk what it is lol -wm
+#players-list {
+  display: none;
+  margin-left: 12px;
+  margin-bottom: 12px;
+  li {
+    display: inline;
+    line-height: 1.2em;
+    margin: 0;
+    list-style-type: none;
+  }
+}
+#player-list-clearer {
+    clear: both;
+    height: 12px;
+}

@@ -1,0 +1,42 @@
+#current-rev { display: none; }
+
+#build-links {
+  display: block;
+  margin-bottom: 15px;
+  text-align: center;
+  a {
+    margin-bottom: 3px;
+    padding: 5px;
+  }
+}
+
+.builds {
+  margin: 0;
+  border: none;
+  li {
+    float: left;
+    height: 18px;
+    width: 210px;
+    margin-bottom: 5px;
+    padding: 0;
+    padding-left: 10px;
+    list-style-type: none;
+    overflow: hidden;
+    border-left: 5px solid #ddd;
+    a {
+      &.builds-wiki {
+        display: block;
+        float: left;
+        margin-right: 5px;
+        padding: 3px 2px;
+        font-weight: bold;
+      }
+      &.builds-carto {
+        display: block;
+        float: left;
+        padding: 2px;
+        background-color: #eee;
+      }
+    }
+  }
+}

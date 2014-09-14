@@ -13,6 +13,9 @@ def create_app(config_override=None):
     from blueprints.api import api
     api.init_app(application)
 
+    import assets
+    assets.init_assets(application)
+
     import blueprints
     for blueprint in blueprints.blueprints:
         application.register_blueprint(blueprint)

@@ -1,0 +1,19 @@
+#header #header-inner h1 {
+  display: inline-block;
+  float: left;
+  height: 72px;
+  line-height: 72px;
+  padding-left: 40px;
+  font-family: 'Crimson Text', serif;
+  font-size: 2.2em;
+  font-weight: normal;
+  text-transform: lowercase;
+  background: url(/static/img/logo2.png) no-repeat center left;
+  //border-right: 1px solid #ccc;
+  a {
+    padding: 0;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

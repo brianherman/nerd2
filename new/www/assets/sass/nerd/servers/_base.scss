@@ -1,0 +1,45 @@
+.server {
+  height: 200px;
+  margin-bottom: 30px;
+  padding: 0;
+  &.server-creative { background-image: url(/static/img/head-c.png); }
+  &.server-survival { background-image: url(/static/img/head-s.png); }
+  &.server-pve      { background-image: url(/static/img/head-p.png); }
+  &.server-community {
+    background-color: #ffffff;
+    background-image: url(/static/img/head-mumble.png);
+    background-repeat: no-repeat;
+    background-position: 205px 20px;
+  }
+  #server-background-overlay {
+    display: block;
+    height: 192px;
+    width: 960px;
+    border-bottom: 8px solid rgba(0,0,0,0.4);
+    #server-text-wrapper {
+      display: block;
+      float: left;
+      position: relative;
+      top: 20px;
+      padding: 5px 15px 5px 50px;
+      text-align: right;
+      color: white;
+      background-color: rgba(0,0,0,0.6);
+      border-left: 5px solid rgba(0,0,0,0.2);
+    }
+  }
+}
+
+img.usage {
+  display: block;
+  margin: 0 auto;
+}
+
+#server-c { background-image: url(/static/img/c-icon.png); }
+#server-s { background-image: url(/static/img/s-icon.png); }
+#server-p { background-image: url(/static/img/p-icon.png); }
+
+@import
+  "_index",
+  "_revisions",
+  "_builds";

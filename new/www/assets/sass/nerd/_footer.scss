@@ -1,0 +1,12 @@
+#footer {
+  clear: left;
+  margin-bottom: 40px;
+  background-image: url(/static/img/irongrip.png);
+  span {
+    display: block;
+    padding: 7px 0 12px 12px;
+    font-weight: bold;
+    color: white;
+    border-top: 5px solid rgba(0,0,0,0.2);
+  }
+}

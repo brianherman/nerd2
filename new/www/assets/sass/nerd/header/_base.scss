@@ -1,0 +1,22 @@
+#header {
+  height: 72px;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  background-image: url(/static/img/back4.png);
+  color: white;
+  #header-inner {
+    width: 1000px;
+    margin: 0 auto;
+    a {
+      color: white;
+      &:hover {
+        background-color: rgba(0,0,0,0.7);
+      }
+    }
+  }
+}
+
+@import
+  "_logo",
+  "_menu",
+  "_status";

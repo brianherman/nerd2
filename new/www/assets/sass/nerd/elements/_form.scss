@@ -1,0 +1,26 @@
+form {
+  display: block;
+  width: 480px;
+  margin: 0 auto;
+  padding: 15px;
+  text-align:center;
+  background: url(/static/img/back5.png);
+  border-color: #ccc;
+}
+input[type="text"] {
+  height: 15px;
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+input[type="submit"] {
+  height: 24px;
+  padding: 2px;
+  font-size: 1em;
+  background-color: white;
+  font-weight: bold;
+  border: 1px solid #999;
+}
+label {
+  margin-right: 10px;
+  font-weight: bold;
+}

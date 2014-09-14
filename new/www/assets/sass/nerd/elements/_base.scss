@@ -1,0 +1,33 @@
+// Basic elements
+p {
+  padding-bottom: 10px;
+}
+
+a {
+  color: #007dc6;
+  text-decoration: none;
+  padding: 0 2px;
+}
+#content a:hover {
+  color: white;
+  background-color: #007dc6;
+}
+
+ol, ul {
+  margin-left: 25px;
+}
+li {
+  padding: 4px 0 0 5px;
+}
+
+blockquote {
+  padding: 10px;
+  border-left: 5px solid #CCC;
+  margin-bottom: 24px;
+  background-color: #EEEEEE;
+}
+
+// Imports
+@import
+  "_headers",
+  "_form";
