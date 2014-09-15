@@ -15,7 +15,13 @@ function loadRevision(rev) {
         $('#map-download').attr('href', '/backups/' + sname + '-rev' + pad(rev.toString(), 2) + '.tar.gz');
         
         $('#carto').show();
-        $('#carto').attr('href', 'http://redditpublic.com/carto/' + sname + '/' + sname.substr(0,1) + pad(rev.toString(), 2) + '/carto/index.html');
+        if ((sname == 'pve' && rev > 10) || (sname == 'creative' && rev > 24) || (sname == 'survival' && rev > 20)) {
+            $('#carto').attr('href', 'http://redditpublic.com/carto/' + sname + '/' + sname.substr(0,1) + pad(rev.toString(), 2) + '/index.html');
+        } else if (sname == 'creative' && rev == 24) {
+            $('#carto').attr('href', 'http://redditpublic.com/carto/' + sname + '/current/index.html');
+        } else {
+            $('#carto').attr('href', 'http://redditpublic.com/carto/' + sname + '/' + sname.substr(0,1) + pad(rev.toString(), 2) + '/carto/index.html');
+        }
     } else if (rev == current) {
         $('#map-download').hide();
         
@@ -23,7 +29,7 @@ function loadRevision(rev) {
             $('#carto').hide();
         } else {
             $('#carto').show();
-            $('#carto').attr('href', 'http://redditpublic.com/carto/' + sname + '/current/');
+            $('#carto').attr('href', 'http://nerd.nu/maps/' + sname + '/');
         }
     }
     

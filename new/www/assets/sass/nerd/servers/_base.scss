@@ -35,7 +35,6 @@ img.usage {
   margin: 0 auto;
 }
 
-@import
-  "_index",
-  "_revisions",
-  "_builds";
+@import "_index";
+@import "_revisions";
+@import "_builds";

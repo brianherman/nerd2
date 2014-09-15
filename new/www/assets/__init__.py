@@ -8,7 +8,7 @@ def init_assets(application):
     assets.url = "/static"
 
     css_main = Bundle('sass/app.scss',
-                      filters=('scss,cssmin'),
+                      filters=('pyscss,cssmin'),
                       depends=('sass/*.scss', 'sass/**/*.scss', 'sass/**/**/*.scss'),
                       output='css/gen/app.%(version)s.css')
     assets.register('css_main', css_main)

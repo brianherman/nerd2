@@ -3,7 +3,9 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/player.js') }}"></script>
 {% endblock %}
 {% block css %}
-  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/player.css') }}"/>
+  <style>
+    #content { display: none; }
+  </style>
 {% endblock %}
 {% block precontent %}
   <div id="player">

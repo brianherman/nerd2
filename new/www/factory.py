@@ -21,6 +21,6 @@ def create_app(config_override=None):
         application.register_blueprint(blueprint)
 
     import util
-    util.init_app(application)
+    util.init_utils(application)
 
     return application

@@ -2,20 +2,13 @@
 {% block js %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/staff.js') }}"></script>
 {% endblock %}
-{% block css %}
-  <style>
-    .scratch {
-      display: none;
-    }
-  </style>
-{% endblock %}
 
 {% macro faces(mode, role) %}
   <ul class="playerlist{{ mode }}">
     {%- for p in staff_list[role] %}
     <li>
       <a href="{{ url_for('player.player', username=p) }}">
-        <span class="mc-skin-{{ mode }}" data-minecraft-username="{{ p }}"></span>
+        <span class="mc-skin" data-minecraft-username="{{ p }}"></span>
         <span>{{ p }}</span>
       </a>
     </li>

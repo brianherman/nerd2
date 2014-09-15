@@ -1,0 +1,39 @@
+@import "_lists";
+@import "_skin";
+
+#player {
+  width: 960px;
+  margin: 0 auto;
+  #player-inner {
+    float: left;
+    width: 785px;
+    margin: 20px 0 0 30px;
+    padding: 15px 20px;
+    background-color: white;
+    border-left: 5px solid #ccc;
+    h2 {
+      margin-bottom: 5px;
+      padding: 0;
+      text-transform: none;
+      background-color: transparent;
+    }
+  }
+  .mc-skin {
+    float: left;
+    /* keeps space to left of #player-inner while skin is loading */
+    display: block;
+    min-height: 1px;
+    width: 100px;
+    &:not(:empty)::after {
+      content: '';
+      display: block;
+      height: 50px;
+      width: 100px;
+      margin-top: -45px;
+      background: rgba(0,0,0,0.25);
+      -moz-border-radius: 50px / 25px;
+      -webkit-border-radius: 50px / 25px;
+      border-radius: 50px / 25px;
+    }
+  }
+}
