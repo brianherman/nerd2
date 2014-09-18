@@ -1,3 +1,7 @@
+function pad(str, max) {
+    return str.length < max ? pad("0" + str, max) : str;
+}
+
 function loadRevision(rev) {
     rev = parseInt(rev);
     current = parseInt($('#current-rev').text());
