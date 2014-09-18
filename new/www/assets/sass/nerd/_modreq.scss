@@ -1,0 +1,32 @@
+#requests-table {
+  width: 100%;
+  margin: 1em auto;
+  border-collapse: collapse;
+  border: 1px solid #e5eff8;
+  tr {
+    &.odd {
+      background: #f7fbff;
+    }
+    td, th {
+      padding: .3em 1em;
+      text-align: left;
+      color: #678197;
+      border-left: 1px solid #e5eff8;
+      border-right: 1px solid #e5eff8;
+    }
+    th {
+      padding: .3em .5em;
+      font-family: 'Arvo', serif;
+      font-weight: bold;
+      background: #f4f9fe;
+    }
+  }
+  thead th {
+    font-size: 1.2em;
+    line-height: 2em;
+    color: #66a3d3;
+  }
+  tfoot th {
+    font-size: 1.1em;
+  }
+} 

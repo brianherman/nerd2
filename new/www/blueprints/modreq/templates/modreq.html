@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block css %}
+  {%- if refresh %}
+  <meta http-equiv="refresh" content="{{ refresh }}">
+  {%- endif %}
+{%- endblock %}
+{% block js %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/modreq.js') }}"></script>
+{%- endblock %}
+
+{% block pagetitle %}
+  <h2 class="server server-{{ server }}">
+    <span id="server-background-overlay">
+      <span id="server-text-wrapper"><span id="server-name">{{ server }}</span>: <em>modreqs</em></span>
+    </span>
+  </h2>
+{%- endblock %}
+
+{% block content %}
+  <a href="{{ url_for('modreq.landing') }}">back to modreq landing</a>
+  <table id="requests-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Player</th>
+        <th>Request</th>
+        <th>Status</th>
+        <th style="min-width: 85px;">Handled by</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    {%- for req in requests %}
+    <tr id="req-{{ req.id }}" class="{{ loop.cycle('odd', 'even') }}">
+      <td><a href="#req-{{ req.id }}">{{ req.id }}</a></td>
+      <td><a href="{{ url_for('player.player', username=req.request_by) }}">{{ req.request_by }}</a></td>
+      <td>{{ req.request_text|safe }}</td>
+      <td>{{ req.status }}</td>
+      <td>{% if req.response_by %}<a href="{{ url_for('player.player', username=req.response_by) }}">{{ req.response_by }}</a>{% endif %}</td>
+      <td>{{ req.response_text|replace('None', '')|safe }}</td>
+    </tr>
+    {%- endfor %}
+    <tfoot>
+      <tr>
+        <th>#</th>
+        <th>Player</th>
+        <th>Request</th>
+        <th>Status</th>
+        <th>Handled by</th>
+        <th>Message</th>
+      </tr>
+    </tfoot>
+  </table>
+{%- endblock %}
