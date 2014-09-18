@@ -20,18 +20,18 @@ class ModreqSource(Source):
     def _handle_modreqs(self, response_data, server):
         columns = [
             'id',
-            'player_name',
-            'request',
+            'request_by',
+            'request_text',
             'status',
-            'handled_by',
-            'close_message'
+            'response_by',
+            'response_text'
         ]
         rows = []
         for row_html in re.findall('<tr.*?><td>(.*?)</td></tr>', response_data):
             row_parts = row_html.split("</td><td>")
             row_data = dict(zip(columns, row_parts))
-            rows.append(row_data)
+            row_data['server'] = server
+            self.api_call('update_modreq', **row_data)
 
-        self.api_call('update_modreqs', server=server, rows=rows)
 
 source = ModreqSource
