@@ -1,10 +1,8 @@
 {% extends "base.html" %}
-{% block css %}
+{% block js %}
   {%- if refresh %}
   <meta http-equiv="refresh" content="{{ refresh }}">
   {%- endif %}
-{%- endblock %}
-{% block js %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/modreq.js') }}"></script>
 {%- endblock %}
 
