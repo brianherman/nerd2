@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
     <title>Reddit Public Minecraft{% if title %} :: {{ title }}{% endif %}</title>
     <link type="image/png" rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     {%- assets "css_main" %}
@@ -19,7 +20,6 @@
     <div id="header">
       <div id="header-inner">
         <h1><a href="{{ url_for('standalone.index') }}">Reddit Public Minecraft</a></h1>
-
         <ul id="menu">
           <li>
             <a href="{{ url_for('standalone.index') }}">servers</a>
@@ -47,26 +47,24 @@
             </ul>
           </li>
         </ul>
-        
         <table id="server-status">
           {%- for server_name in server_names %}
-            <tr>
-              <th><a href="{{ url_for('server.%s_index' % server_name) }}">{{ server_name }}</a></th>
-              <td>
-                <span>
-                  {%- if get_status(server_name) %}
-                  {{ get_players(server_name) }} online
-                  {%- else %}
-                  down
-                  {%- endif %}
-                </span>
-              </td>
-            </tr>
+          <tr>
+            <th><a href="{{ url_for('server.%s_index' % server_name) }}">{{ server_name }}</a></th>
+            <td>
+              <span>
+                {%- if get_status(server_name) %}
+                {{ get_players(server_name) }} online
+                {%- else %}
+                down
+                {%- endif %}
+              </span>
+            </td>
+          </tr>
           {%- endfor %}
         </table>
       </div>
     </div>
-
     {%- with messages = get_flashed_messages() %}
     {%- if messages %}
     <ul id="flashes">
@@ -76,18 +74,14 @@
     </ul>
     {%- endif %}
     {%- endwith %}
-
     {%- block precontent %}{% endblock %}
-    
     <div id="content">
       {%- block pagetitle %}
         <h2>{{ title }}</h2>
       {%- endblock %}
-      
       <div id="content-inner">
         {%- block content %}{{ body }}{% endblock %}
       </div>
-      
       <div id="footer">
         <span>&copy; 2012 all rights reserved. email outage@nerd.nu if something breaks.</span>
       </div>
