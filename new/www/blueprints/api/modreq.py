@@ -36,7 +36,7 @@ class UpdateModreq(Resource):
         db.session.commit()
 
         return {
-            'name': args.get("id"),
+            'id': args.get("id"),
             'server': args.get("server"),
             'status': args.get("status"),
             'request_by': args.get("request_by"),
@@ -69,4 +69,4 @@ class GetModreqs(Resource):
 
         return response
 
-api.add_resource(GetModreqs, '/get_modres')
+api.add_resource(GetModreqs, '/get_modreqs')

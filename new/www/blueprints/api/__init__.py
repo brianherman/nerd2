@@ -3,4 +3,4 @@ from flask.ext.restful import Api
 
 api = Api(prefix='/api')
 
-from . import cache, creation
+from . import cache, creation, modreq

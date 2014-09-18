@@ -2,8 +2,8 @@ from . import db
 
 class Modreq(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    server = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.String(20))
+    server = db.Column(db.String(10), primary_key=True, index=True)
+    status = db.Column(db.String(10))
     request_by = db.Column(db.String(16))
     response_by   = db.Column(db.String(16))
     request_text = db.Column(db.String(200))
