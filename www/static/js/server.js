@@ -1,12 +1,7 @@
-function pad (str, max) {
-  return str.length < max ? pad("0" + str, max) : str;
-}
-
 function loadRevision(rev) {
     rev = parseInt(rev);
     current = parseInt($('#current-rev').text());
     sname = $('#server-name').text();
-
     
     $('#rev-list a.selected').each(function() { $(this).removeClass('selected') });
     $('#label-rev-'+rev).addClass('selected');
@@ -33,8 +28,7 @@ function loadRevision(rev) {
         }
     }
     
-    
-    $.getJSON('/api/get_creations?server='+$('#server-name').text()+'&revision='+rev, function(data) {
+    $.getJSON('/api/get_creations?server='+sname+'&revision='+rev, function(data) {
         var list = $('<ul class="builds" />');
         $.each(data, function(i, v) {
             var inner = $('<li><a class="builds-wiki" href="http://redditpublic.com/wiki/' + v['name'] + '">'+ v['name'] + '</a></li>');
@@ -44,9 +38,7 @@ function loadRevision(rev) {
             list.append(inner);
         });
         $('#builds').html(list);
-
     });
-    
 }
 
 $(document).ready(function(){
@@ -76,8 +68,3 @@ $(document).ready(function(){
         loadRevision($('#current-rev').text());
     }
 });
-
-//$(document).scroll(function(e){
-//    $("#header").fadeTo(0, Math.min(1, 0.9 + window.scrollY/800));
-//});
-
