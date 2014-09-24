@@ -26,9 +26,15 @@ def init_utils(application):
                 key="MC_%s_USERS_MAX" % server.upper()
             ).first().value
             return "%s/%s" % (current, max)
+        def pretty_playertime(seconds):
+            hours = seconds / 3600.0
+            h = seconds / 3600
+            m = int((hours - h) * 60)
+            return '%sh %sm' % (str(h), str(m))
         return dict(
             get_players=get_players,
-            get_status=get_status)
+            get_status=get_status,
+            pretty_playertime=pretty_playertime)
 
     @application.errorhandler(404)
     @application.errorhandler(500)
