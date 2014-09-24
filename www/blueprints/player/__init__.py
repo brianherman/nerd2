@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, send_file
+from StringIO import StringIO
+from models.playertime import PlayerTime
 
 import re
 import requests
-from StringIO import StringIO
 
 blueprint = Blueprint('player', __name__, template_folder='templates')
 
@@ -10,9 +11,11 @@ blueprint = Blueprint('player', __name__, template_folder='templates')
 def player(username):
     m = re.match('^[0-9A-Za-z_]{1,16}$', username)
     if m:
+        playertime = PlayerTime.query.filter_by(playername=username).all()
         options = {
             'title': username,
             'username': username,
+            'playertime': playertime,
         }
         return render_template('player.html', **options)
     else:
