@@ -4,34 +4,34 @@
 #player-title {
   text-transform: none;
 }
-  #player-inner {
-    float: left;
-    height: 100%;
-    margin-left: 30px;
-    padding: 15px 20px;
-    /*border-left: 5px solid #ccc;*/
-    h2 {
-      margin-bottom: 5px;
-      padding-left: 0;
-      background-color: transparent;
-    }
+#player-inner {
+  float: left;
+  height: 100%;
+  margin-left: 30px;
+  padding: 15px 20px;
+  /*border-left: 5px solid #ccc;*/
+  h2 {
+    margin-bottom: 5px;
+    padding-left: 0;
+    background-color: transparent;
   }
-  .mc-skin {
-    float: left;
-    /* keeps space to left of #player-inner while skin is loading */
+}
+#player-skin {
+  float: left;
+  /* keeps space to left of #player-inner while skin is loading */
+  display: block;
+  min-height: 1px;
+  width: 100px;
+  margin: 10px 0;
+  &:not(:empty)::after {
+    content: '';
     display: block;
-    min-height: 1px;
+    height: 50px;
     width: 100px;
-    margin: 10px 0;
-    &:not(:empty)::after {
-      content: '';
-      display: block;
-      height: 50px;
-      width: 100px;
-      margin-top: -45px;
-      background: rgba(0,0,0,0.25);
-      -moz-border-radius: 50px / 25px;
-      -webkit-border-radius: 50px / 25px;
-      border-radius: 50px / 25px;
-    }
+    margin-top: -45px;
+    background: rgba(0,0,0,0.25);
+    -moz-border-radius: 50px / 25px;
+    -webkit-border-radius: 50px / 25px;
+    border-radius: 50px / 25px;
   }
+}

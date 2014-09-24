@@ -6,7 +6,7 @@
   <h2 id="player-title">{{ username }}</h2>
 {%- endblock %}
 {% block content %}
-  <span class="mc-skin" data-minecraft-username="{{ username }}"></span>
+  <span id="player-skin" class="mc-skin" data-minecraft-username="{{ username }}"></span>
   <div id="player-inner">
     <h2>time played</h2>
     {%- for server in playertime %}
