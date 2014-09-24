@@ -42,6 +42,7 @@
             <a href="#">info</a>
             <ul>
               <li><a href="{{ url_for('wiki.rules') }}">rules</a></li>
+              <li><a href="{{ url_for('modreq.landing') }}">modreq</a></li>
               <li><a href="{{ url_for('standalone.appeal') }}">appeal a ban</a></li>
               <li><a href="{{ url_for('standalone.staff') }}">staff</a></li>
             </ul>
@@ -83,7 +84,7 @@
         {%- block content %}{{ body }}{% endblock %}
       </div>
       <div id="footer">
-        <span>&copy; 2012 all rights reserved. email outage@nerd.nu if something breaks.</span>
+        <span>&copy; 2012-2014 all rights reserved. email outage@nerd.nu if something breaks.</span>
       </div>
     </div>
   </body>
