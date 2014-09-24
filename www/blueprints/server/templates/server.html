@@ -92,7 +92,7 @@
   <p>top 10 most active users</p>
   <ol>
     {%- for player in top_players %}
-    <li><strong>{{ player.username }}</strong>: {{ player.time }}</li>
+    <li><strong>{{ player.playername }}</strong>: {{ pretty_playertime(player.seconds) }}</li>
     {%- endfor %}
   </ol>
   {%- endif %}
