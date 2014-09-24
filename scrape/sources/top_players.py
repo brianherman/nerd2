@@ -63,8 +63,12 @@ class TopPlayersSource(Source):
         return json.dumps(stats)
 
     def _handle_stats(self, response_data, server):
-        stats = self._handle_data(response_data)
-        self.api_call("update_cache", key="MC_"+server.upper()+"_TOP_PLAYERS", value=stats)
+        raw_data = response_data['storage']['usagestats']
+        data = json.loads(raw_data)['players']
+
+        for playername,times in data.items():
+            seconds = times['min'] / 1000
+            self.api_call("update_playertime", playername=playername, server=server, seconds=seconds)
 
 
 source = TopPlayersSource
