@@ -35,6 +35,16 @@ img.usage {
   margin: 0 auto;
 }
 
+#players-list {
+  display: none;
+  margin-left: 12px;
+  margin-bottom: 12px;
+  li {
+    display: inline-block;
+    list-style-type: none;
+  }
+}
+
 @import "_index";
 @import "_revisions";
 @import "_builds";
