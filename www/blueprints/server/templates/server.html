@@ -16,7 +16,7 @@
     <a href="#" id="players-showhide">show/hide</a></p>
     <ul id="players-list">
       {%- for player in players %}
-      <li>{{ player }}</li>
+      <li><a href="{{ url_for('player.player', username=player) }}">{{ player }}</a></li>
       {%- endfor %}
     </ul>
   {%- else %}
