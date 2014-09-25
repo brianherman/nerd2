@@ -92,7 +92,10 @@
   <p>top 10 most active users</p>
   <ol>
     {%- for player in top_players %}
-    <li><strong>{{ player.playername }}</strong>: {{ pretty_playertime(player.seconds) }}</li>
+    <li>
+      <strong><a href="{{ url_for('player.player', username=player.playername) }}">{{ player.playername }}</a>:</strong>
+      {{ pretty_playertime(player.seconds) }}
+    </li>
     {%- endfor %}
   </ol>
   {%- endif %}
