@@ -13,9 +13,8 @@ class UpdatePlayerTime(Resource):
         args = self.post_parser.parse_args()
 
         playertime = PlayerTime.query.filter_by(
-            playername=args.get("playertime"),
-            server=args.get("server"),
-            seconds=args.get("seconds")
+            playername=args.get("playername"),
+            server=args.get("server")
         ).first()
         if playertime:
             playertime.seconds = args.get("seconds")
