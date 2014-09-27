@@ -4,44 +4,41 @@ from flask.ext.restful.reqparse import RequestParser
 from models import db
 from models.creation import Creation
 
-class UpdateCreation(Resource):
+import json
+
+
+class UpdateCreations(Resource):
     post_parser = RequestParser()
-    post_parser.add_argument("name", required=True)
-    post_parser.add_argument("server", type=str, required=True)
-    post_parser.add_argument("revision", type=int, required=True)
-    post_parser.add_argument("x", type=int, required=True)
-    post_parser.add_argument("z", type=int, required=True)
+    post_parser.add_argument("json", required=True)
     def post(self):
         args = self.post_parser.parse_args()
 
-        creation = Creation.query.filter_by(
-            server=args.get("server"),
-            revision=args.get("revision"),
-            x=args.get("x"),
-            z=args.get("z")
-        ).first()
-        if creation:
-            pass
-        else:
-            creation = Creation(
-                args.get("name"),
-                args.get("server"),
-                args.get("revision"),
-                args.get("x"),
-                args.get("z")
-            )
-            db.session.add(creation)
+        creations = json.loads(args.get("json"))
+        for creation in creations:
+            creation_obj = Creation.query.filter_by(
+                server=creation['server'],
+                revision=creation['revision'],
+                x=creation['x'],
+                z=creation['z']
+            ).first()
+            if creation:
+                pass
+            else:
+                creation_obj = Creation(
+                    creation['name'],
+                    creation['server'],
+                    creation['revision'],
+                    creation['x'],
+                    creation['z']
+                )
+                db.session.add(creation_obj)
         db.session.commit()
 
-        return {
-            'name': args.get("name"),
-            'server': args.get("server"),
-            'revision': args.get("revision"),
-            'x': args.get("x"),
-            'z': args.get("z")
-        }
+        return {'success': True}
 
-api.add_resource(UpdateCreation, '/update_creation')
+
+api.add_resource(UpdateCreations, '/update_creations')
+
 
 class GetCreations(Resource):
     get_parser = RequestParser()
@@ -63,5 +60,6 @@ class GetCreations(Resource):
             ))
 
         return response
+
 
 api.add_resource(GetCreations, '/get_creations')

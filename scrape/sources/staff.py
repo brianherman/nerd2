@@ -28,7 +28,6 @@ class StaffSource(Source):
         #   at the end of each iteration
         title = None
         for section, level, new_title in re.findall('(.*?)<h([0-9]).*?>([^<]+)', response_data):
-            print level, new_title
             if title:
                 # In Memoriam section returns players as a dictionary
                 if title == "In Memoriam":

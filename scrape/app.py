@@ -38,14 +38,13 @@ class ScrapeApp(object):
         if method == "update_cache":
             #print method, kwargs['key']
             payload = {'key': kwargs['key'], 'value': kwargs['value']}
-        elif method == "update_creation":
-            #print method, kwargs['name']
-            payload = {'name': kwargs['name'], 'server': kwargs['server'],
-                'revision': kwargs['revision'], 'x': kwargs['x'], 'z': kwargs['z']}
-        elif method == "update_modreq":
+        elif method == "update_creations":
             payload = kwargs
-        elif method == "update_playertime":
-            payload = {'playername': kwargs['playername'], 'server': kwargs['server'], 'seconds': kwargs['seconds']}
+            #print method, kwargs['name']
+        elif method == "update_modreqs":
+            payload = kwargs
+        elif method == "update_playertimes":
+            payload = kwargs
 
         if payload:
             self.api_calls.append((method, payload))

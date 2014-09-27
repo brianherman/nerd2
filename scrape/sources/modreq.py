@@ -1,4 +1,5 @@
 import re
+import json
 
 from twisted.internet import task
 from twisted.web import client
@@ -31,7 +32,8 @@ class ModreqSource(Source):
             row_parts = row_html.split("</td><td>")
             row_data = dict(zip(columns, row_parts))
             row_data['server'] = server
-            self.api_call('update_modreq', **row_data)
+            rows.append(row_data)
+        self.api_call('update_modreqs', json=json.dumps(rows))
 
 
 source = ModreqSource
