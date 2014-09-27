@@ -75,6 +75,7 @@
     {%- endif %}
     {%- endwith %}
     {%- block precontent %}{% endblock %}
+    {%- block outcontent %}
     <div id="content">
       {%- block pagetitle %}
         <h2>{{ title }}</h2>
@@ -86,5 +87,6 @@
         <span>&copy; 2012 all rights reserved. email outage@nerd.nu if something breaks.</span>
       </div>
     </div>
+    {% endblock %}
   </body>
 </html>
