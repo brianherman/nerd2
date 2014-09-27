@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, send_file
 from StringIO import StringIO
 from models.cache import Cache
-from models.playertime import PlayerTime
+from models.player_time import PlayerTime
 
 import re
 import json
@@ -21,7 +21,7 @@ def player(username):
             else:
                 online = None
 
-        playertime = PlayerTime.query.filter_by(playername=username).all()
+        player_time = PlayerTime.query.filter_by(playername=username).all()
 
         staff = json.loads(Cache.query.filter_by(key='STAFF_LIST').first().value)
         for k,v in staff.items():
@@ -38,7 +38,7 @@ def player(username):
             'title': username,
             'username': username,
             'online': online,
-            'playertime': playertime,
+            'player_time': player_time,
             'role': role
         }
         return render_template('player.html', **options)

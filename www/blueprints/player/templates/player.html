@@ -17,7 +17,7 @@
     <h4>staff role: {{ role }}</h4>
     {%- endif %}
     <h2>time played</h2>
-    {%- for server in playertime %}
+    {%- for server in player_time %}
     <p>
       <strong>
         <a href="{{ url_for('server.%s_index' % server.server) }}">{{ server.server }}</a>:

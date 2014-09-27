@@ -2,7 +2,7 @@ from . import api
 from flask.ext.restful import Resource
 from flask.ext.restful.reqparse import RequestParser
 from models import db
-from models.playertime import PlayerTime
+from models.player_time import PlayerTime
 
 import json
 
@@ -15,19 +15,19 @@ class UpdatePlayerTimes(Resource):
 
         stats = json.loads(args.get("json"))
         for stat in stats:
-            playertime = PlayerTime.query.filter_by(
+            player_time = PlayerTime.query.filter_by(
                 playername=stat['playername'],
                 server=stat['server']
             ).first()
-            if playertime:
-                playertime.seconds = stat['seconds']
+            if player_time:
+                player_time.seconds = stat['seconds']
             else:
-                playertime = PlayerTime(
+                player_time = PlayerTime(
                     stat['playername'],
                     stat['server'],
                     stat['seconds']
                 )
-                db.session.add(playertime)
+                db.session.add(player_time)
         db.session.commit()
 
         return {'success': True}
