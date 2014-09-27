@@ -2,9 +2,7 @@
 {% block js %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/player.js') }}"></script>
 {% endblock %}
-{% block pagetitle %}
-  <h2 id="player-title">{{ username }}</h2>
-{%- endblock %}
+{% block pagetitle %}{%- endblock %}
 {% block content %}
   <span id="player-skin" class="mc-skin" data-minecraft-username="{{ username }}"></span>
   <div id="player-inner">
