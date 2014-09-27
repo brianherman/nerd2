@@ -21,7 +21,10 @@ def player(username):
             else:
                 online = None
 
-        playertime = PlayerTime.query.filter_by(playername=username).all()
+        playertime = {}
+
+        for server in PlayerTime.query.filter_by(playername=username).all():
+            playertime[server.server] = server.seconds
 
         staff = json.loads(Cache.query.filter_by(key='STAFF_LIST').first().value)
         for k,v in staff.items():

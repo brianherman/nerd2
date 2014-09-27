@@ -8,22 +8,24 @@
 {% block content %}
   <span id="player-skin" class="mc-skin" data-minecraft-username="{{ username }}"></span>
   <div id="player-inner">
-    {%- if online %}
-    <h4>currently online on <a href="{{ url_for('server.%s_index' % online) }}">{{ online }}</a></h4>
-    {%- else %}
-    <h4>not playing right now :(</h4>
-    {%- endif %}
-    {%- if role %}
-    <h4>staff role: {{ role }}</h4>
-    {%- endif %}
-    <h2>time played</h2>
-    {%- for server in playertime %}
-    <p>
-      <strong>
-        <a href="{{ url_for('server.%s_index' % server.server) }}">{{ server.server }}</a>:
-      </strong>
-      {{ pretty_playertime(server.seconds) }}
+    <h2>{{username}}</h2>
+    {%- if role %}<p class="player-role">{{role}}</p>{%- endif %}
+    <p class="player-online">
+      {%- if online %}
+        Playing on <a href="{{ url_for('server.%s_index' % online) }}">{{ online }}</a>.
+      {%- else %}
+        Currently not online.
+      {%- endif %}
     </p>
+    {%- for server_name in server_names %}
+      <h4><a href="{{ url_for('server.%s_index' % server_name) }}">{{server_name}}</a></h4>
+      <p>Play time:
+        {%- if server_name in playertime %}
+          {{ pretty_playertime(playertime[server_name]) }}.
+        {%- else %}
+          Unknown.
+        {%- endif %}
+      </p>
     {%- endfor %}
       {#online in pve|creative
       
