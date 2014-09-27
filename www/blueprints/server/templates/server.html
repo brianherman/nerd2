@@ -89,7 +89,7 @@
   
   {%- if top_players %}
   <h3>top players</h3>
-  <p>top 10 most active users</p>
+  <p>top 10 most active users, see all <a href="{{ url_for('usage.usage', server=title) }}">here</a>.</p>
   <ol>
     {%- for player in top_players %}
     <li>
