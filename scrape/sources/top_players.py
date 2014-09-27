@@ -30,41 +30,24 @@ class TopPlayersSource(Source):
         return d0
 
     def start(self):
-        task.LoopingCall(self.update).start(60*60*2)
+        task.LoopingCall(self.update).start(60)
 
     def update(self):
-        for server in ("creative", "survival", "pve"):
+        for server in ("creative", "pve"):
             d = self._query(server)
             d.addCallback(self._handle_stats, server)
 
-    def _handle_data(self, data):
-        r = data['storage']['usagestats']
-
-        sp = json.loads(r)['players']
-        sl = {}
-        for k,v in sp.items():
-            sl[k] = v['min']
-        su = sorted(sl.items(), key=lambda x:x[1], reverse=True)
-
-        stats = []
-        count = 0
-        for stat in su:
-            if count == 10:
-                break
-            def pretty_time(time):
-                hours = time / 3600000.0
-                h = time / 3600000
-                m =  int((hours - h) * 60)
-                return str(h)+'h '+str(m)+'m'
-            time = pretty_time(stat[1])
-            stats.append({'username': stat[0], 'time': time})
-            count = count+1
-
-        return json.dumps(stats)
-
     def _handle_stats(self, response_data, server):
-        stats = self._handle_data(response_data)
-        self.api_call("update_cache", key="MC_"+server.upper()+"_TOP_PLAYERS", value=stats)
+        raw_data = response_data['storage']['usagestats']
+        data = json.loads(raw_data)
+
+        online = json.dumps(data['online'])
+        self.api_call("update_cache", key="MC_%s_ONLINE" % server.upper(), value=online)
+
+        stats = data['players']
+        for playername,times in stats.items():
+            seconds = times['min'] / 1000
+            self.api_call("update_playertime", playername=playername, server=server, seconds=seconds)
 
 
 source = TopPlayersSource

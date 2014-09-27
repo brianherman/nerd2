@@ -17,6 +17,9 @@
         color: #0000C6 !important;
       }
     }
+    span.mc-skin {
+      display: block;
+    }
   }
 }
 
@@ -28,12 +31,13 @@
     margin: 10px 15px;
     padding: 5px;
     list-style-type: none;
+    background-color: #E7E7E7;
     border: 1px solid #ddd;
     &:hover {
       border-color: #ccc;
     }
     a {
-      background-color: white !important;
+      background-color: transparent !important;
       &:hover {
         color: #0000C6 !important;
       }
@@ -46,21 +50,4 @@
       }
     }
   }
-}
-
-// some old thing idk what it is lol -wm
-#players-list {
-  display: none;
-  margin-left: 12px;
-  margin-bottom: 12px;
-  li {
-    display: inline;
-    line-height: 1.2em;
-    margin: 0;
-    list-style-type: none;
-  }
-}
-#player-list-clearer {
-    clear: both;
-    height: 12px;
 }

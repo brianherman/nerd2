@@ -12,16 +12,16 @@
 {% block content %}
   {%- if get_status(title) %}
   <p><strong>{{ get_players(title) }}</strong> players online
-    {#%- if status.players %}
+  {%- if players %}
     <a href="#" id="players-showhide">show/hide</a></p>
     <ul id="players-list">
-      {%- for player in status.players %}
-      <li>{{ player }}</li>
+      {%- for player in players %}
+      <li><a href="{{ url_for('player.player', username=player) }}">{{ player }}</a></li>
       {%- endfor %}
     </ul>
-    {%- else %}
+  {%- else %}
   </p>
-  {%- endif %#}
+  {%- endif %}
   {%- endif %}
   
   {%- autoescape false %}
@@ -89,10 +89,13 @@
   
   {%- if top_players %}
   <h3>top players</h3>
-  <p>top 10 most active users</p>
+  <p>top 10 most active users, see all <a href="{{ url_for('usage.usage', server=title) }}">here</a>.</p>
   <ol>
     {%- for player in top_players %}
-    <li><strong>{{ player.username }}</strong>: {{ player.time }}</li>
+    <li>
+      <strong><a href="{{ url_for('player.player', username=player.playername) }}">{{ player.playername }}</a>:</strong>
+      {{ pretty_playertime(player.seconds) }}
+    </li>
     {%- endfor %}
   </ol>
   {%- endif %}

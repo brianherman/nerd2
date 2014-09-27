@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+  <h2 class="server server-{{ server }}">
+    <span id="server-background-overlay">
+      <span id="server-text-wrapper"><span id="server-name">{{ server }}</span>: <em>usage stats</em></span>
+    </span>
+  </h2>
+{%- endblock %}
+
+{% block content %}
+  <a href="{{ url_for('server.%s_index' % server) }}">back to server</a>
+  <table id="requests-table">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Time online</th>
+        <th>Online</th>
+      </tr>
+    </thead>
+    {%- for stat in stats %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+      <td><a href="{{ url_for('player.player', username=stat.playername) }}">{{ stat.playername }}</a></td>
+      <td>{{ pretty_playertime(stat.seconds) }}</td>
+      <td>{% if stat.playername in online %}yes{% else %}no{% endif %}</td>
+    </tr>
+    {%- endfor %}
+    <tfoot>
+      <tr>
+        <th>Player</th>
+        <th>Time online</th>
+        <th>Online</th>
+      </tr>
+    </tfoot>
+  </table>
+{%- endblock %}

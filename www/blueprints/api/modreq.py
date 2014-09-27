@@ -22,7 +22,11 @@ class UpdateModreq(Resource):
             id=args.get("id"),
             server=args.get("server")
         ).first()
-        if not modreq:
+        if modreq:
+            modreq.status = args.get("status")
+            modreq.response_by = args.get("response_by")
+            modreq.response_text = args.get("response_text")
+        else:
             modreq = Modreq(
                 args.get("id"),
                 args.get("server"),

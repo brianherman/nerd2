@@ -16,6 +16,9 @@ class Source(object):
             requests.post(self.config.API_URL+'update_creation', data=payload)
         if method == "update_modreq":
             r = requests.post(self.config.API_URL+'update_modreq', data=kwargs)
+        if method == "update_playertime":
+            payload = {'playername': kwargs['playername'], 'server': kwargs['server'], 'seconds': kwargs['seconds']}
+            requests.post(self.config.API_URL+'update_playertime', data=payload)
 
 
 import wiki, mumble, irc, mc_ping, top_players, reddit, forums, staff, modreq

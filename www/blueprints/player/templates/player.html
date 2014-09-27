@@ -2,18 +2,30 @@
 {% block js %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/player.js') }}"></script>
 {% endblock %}
-{% block css %}
-  <style>
-    #content { display: none; }
-  </style>
-{% endblock %}
-{% block precontent %}
-  <div id="player">
-    <span class="mc-skin" data-minecraft-username="{{ username }}"></span>
-    <div id="shadow"></div>
-    <div id="player-inner">
-      <h2><span id="player-name">{{ username }}</span></h2>
-      online in pve|creative
+{% block pagetitle %}
+  <h2 id="player-title">{{ username }}</h2>
+{%- endblock %}
+{% block content %}
+  <span id="player-skin" class="mc-skin" data-minecraft-username="{{ username }}"></span>
+  <div id="player-inner">
+    {%- if online %}
+    <h4>currently online on <a href="{{ url_for('server.%s_index' % online) }}">{{ online }}</a></h4>
+    {%- else %}
+    <h4>not playing right now :(</h4>
+    {%- endif %}
+    {%- if role %}
+    <h4>staff role: {{ role }}</h4>
+    {%- endif %}
+    <h2>time played</h2>
+    {%- for server in playertime %}
+    <p>
+      <strong>
+        <a href="{{ url_for('server.%s_index' % server.server) }}">{{ server.server }}</a>:
+      </strong>
+      {{ pretty_playertime(server.seconds) }}
+    </p>
+    {%- endfor %}
+      {#online in pve|creative
       
       for each server:
         12h played in last week (if in top 1000)
@@ -32,9 +44,6 @@
         favourite weapon
       
       pve:
-        same as c.
-    </div>
+        same as c.#}
   </div>
-{% endblock %}
-{% block pagetitle %}{% endblock %}
-{% block content %}{% endblock %}
+{%- endblock %}
