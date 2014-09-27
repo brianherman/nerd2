@@ -75,15 +75,20 @@ class MinecraftPingSource(Source):
             reactor.connectTCP(server_addr, 25565, factory)
 
     def server_up(self, server, data):
-        self.api_call("update_cache",
-            key = "MC_%s_STATUS" % server,
-            value="online")
-        self.api_call("update_cache",
-            key="MC_%s_USERS_CURRENT" % server,
-            value=data['players']['online'])
-        self.api_call("update_cache",
-            key="MC_%s_USERS_MAX" % server,
-            value=data['players']['max'])
+        try:
+            self.api_call("update_cache",
+                key = "MC_%s_STATUS" % server,
+                value="online")
+            self.api_call("update_cache",
+                key="MC_%s_USERS_CURRENT" % server,
+                value=data['players']['online'])
+            self.api_call("update_cache",
+                key="MC_%s_USERS_MAX" % server,
+                value=data['players']['max'])
+        except KeyError:
+            self.api_call("update_cache",
+                key = "MC_%s_STATUS" % server,
+                value="offline")
 
     def server_down(self, server):
         self.api_call("update_cache",
