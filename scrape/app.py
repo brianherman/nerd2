@@ -43,7 +43,7 @@ class ScrapeApp(object):
             #print method, kwargs['name']
         elif method == "update_modreqs":
             payload = kwargs
-        elif method == "update_playertimes":
+        elif method == "update_player_times":
             payload = kwargs
 
         if payload:

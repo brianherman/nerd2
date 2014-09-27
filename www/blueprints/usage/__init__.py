@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from models.playertime import PlayerTime
+from models.player_time import PlayerTime
 from models.cache import Cache
 
 blueprint = Blueprint('usage', __name__, template_folder='templates')

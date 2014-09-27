@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from models.cache import Cache
-from models.playertime import PlayerTime
+from models.player_time import PlayerTime
 import json
 
 blueprint = Blueprint('server', __name__, template_folder='templates')
