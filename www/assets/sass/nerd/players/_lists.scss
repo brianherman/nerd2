@@ -31,12 +31,13 @@
     margin: 10px 15px;
     padding: 5px;
     list-style-type: none;
+    background-color: #E7E7E7;
     border: 1px solid #ddd;
     &:hover {
       border-color: #ccc;
     }
     a {
-      background-color: white !important;
+      background-color: transparent !important;
       &:hover {
         color: #0000C6 !important;
       }
