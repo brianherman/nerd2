@@ -37,10 +37,9 @@ def init_utils(application):
             pretty_playertime=pretty_playertime)
 
     @application.errorhandler(404)
+    def error_404(error):
+        return render_template('error.html', title="404'd!", error_code=404), 404
+
     @application.errorhandler(500)
-    def error(error):
-        options = {
-            'title': 'Oh no! %s' % error.message,
-            'error': error,
-        }
-        return render_template('error.html', **options), error.code
+    def error_500(error):
+        return render_template('error.html', title="Broken Server", error_code=500), 500
