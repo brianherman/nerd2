@@ -21,7 +21,7 @@
       <h4><a href="{{ url_for('server.%s_index' % server_name) }}">{{server_name}}</a></h4>
       <p>Play time:
         {%- if server_name in player_time %}
-          {{ pretty_player_time(player_time[server_name]) }}.
+          {{ pretty_playertime(player_time[server_name]) }}.
         {%- else %}
           Unknown.
         {%- endif %}
