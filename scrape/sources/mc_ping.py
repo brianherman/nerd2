@@ -56,7 +56,12 @@ class MinecraftPingFactory(ClientFactory):
     def got_data(self, data):
         if self.timeout.active():
             self.timeout.cancel()
-        self.source.server_up(self.server_name, data)
+        if 'players' in data:
+            self.source.server_up(self.server_name,
+                                  data['players']['online'],
+                                  data['players']['max'])
+        else:
+            self.source.server_down(self.server_name)
 
 
 
@@ -74,7 +79,7 @@ class MinecraftPingSource(Source):
             factory = MinecraftPingFactory(self, server_name.upper())
             reactor.connectTCP(server_addr, 25565, factory)
 
-    def server_up(self, server, data):
+    def server_up(self, server, users_current, users_max):
         self.api_call("update_cache",
             key = "MC_%s_STATUS" % server,
             value="online")
