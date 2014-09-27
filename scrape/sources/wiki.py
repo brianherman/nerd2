@@ -10,14 +10,8 @@ from sources import Source
 
 
 class WikiSource(Source):
-    def _update_creation(self, name, server, revision, x, z):
-        self.api_call("update_creation",
-            name=name,
-            server=server,
-            revision=revision,
-            x=x,
-            z=z
-        )
+    def _update_creations(self, creations):
+        self.api_call("update_creations", json=json.dumps(creations))
 
     def _query(self, **request_data):
         d0 = defer.Deferred()
@@ -236,6 +230,7 @@ class WikiSource(Source):
         text = response_data[0]['text']
 
         revision = 0
+        creations = []
         for line in text.split("\n"):
             m = re.match('===Warps \(revision (\d+)\)===', line)
             if m:
@@ -243,29 +238,35 @@ class WikiSource(Source):
 
             m = re.match("\* '''([^']+)''' \(\+?([\-\d]+), \d+, \+?([\-\d]+)\)", line)
             if m:
-                self._update_creation(
-                    m.group(1),
-                    'creative',
-                    revision,
-                    int(m.group(2)),
-                    int(m.group(3))
-                )
+                creation = {
+                    'name': m.group(1),
+                    'server': 'creative',
+                    'revision': revision,
+                    'x': int(m.group(2)),
+                    'z': int(m.group(3))
+                }
+                creations.append(creation)
+        self._update_creations(creations)
 
     def _handle_pve_creations(self, response_data):
+        creations = []
         for response in response_data:
             for name, carto_data in re.findall("([^\|\[]+)\]\]\s\{\{CartoP\|?([^}]+)\}\}", response['text']):
                 carto_data = dict((d.split('=') for d in carto_data.split("|")))
                 if name not in ('CoolTown', 'ExampleVille'):
-                    self._update_creation(
-                        name,
-                        'pve',
-                        int(carto_data['r']),
-                        int(carto_data['x']),
-                        int(carto_data['z'])
-                    )
+                    creation = {
+                        'name': name,
+                        'server': 'pve',
+                        'revision': int(carto_data['r']),
+                        'x': int(carto_data['x']),
+                        'z': int(carto_data['z'])
+                    }
+                    creations.append(creation)
+        self._update_creations(creations)
 
     def _handle_global_creations(self, pages):
         def _callback(response_data):
+            creations = []
             for response in response_data:
                 for g0 in re.findall('\{\{Creation\s*\n(.+?)\n\s*\}\}', response['text'], flags=re.DOTALL):
                     args = {}
@@ -295,13 +296,14 @@ class WikiSource(Source):
                                 if server == 'pve' and int(carto_data['r']) > 6:
                                     continue
 
-                                self._update_creation(
-                                    title,
-                                    server,
-                                    int(carto_data['r']),
-                                    int(carto_data['x']),
-                                    int(carto_data['z'])
-                                )
+                                creation = {
+                                    'name': title,
+                                    'server': server,
+                                    'revision': int(carto_data['r']),
+                                    'x': int(carto_data['x']),
+                                    'z': int(carto_data['z'])
+                                }
+                                creations.append(creation)
                         if not found_carto_template:
                             try:
                                 revision = int(args.get('map revision', None))
@@ -338,13 +340,15 @@ class WikiSource(Source):
                             else:
                                 continue
 
-                            self._update_creation(
-                                title,
-                                server,
-                                revision,
-                                coords[0],
-                                coords[1]
-                            )
+                            creation = {
+                                'name': title,
+                                'server': server,
+                                'revision': revision,
+                                'x': coords[0],
+                                'z': coords[1]
+                            }
+                            creations.append(creation)
+            self._update_creations(creations)
 
         pp_content = 50
 

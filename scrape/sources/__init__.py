@@ -10,15 +10,15 @@ class Source(object):
         if method == "update_cache":
             payload = {'key': kwargs['key'], 'value': kwargs['value']}
             requests.post(self.config.API_URL+'update_cache', data=payload)
-        if method == "update_creation":
-            payload = {'name': kwargs['name'], 'server': kwargs['server'],
-                'revision': kwargs['revision'], 'x': kwargs['x'], 'z': kwargs['z']}
-            requests.post(self.config.API_URL+'update_creation', data=payload)
-        if method == "update_modreq":
-            r = requests.post(self.config.API_URL+'update_modreq', data=kwargs)
-        if method == "update_playertime":
-            payload = {'playername': kwargs['playername'], 'server': kwargs['server'], 'seconds': kwargs['seconds']}
-            requests.post(self.config.API_URL+'update_playertime', data=payload)
+        if method == "update_creations":
+            payload = {'json': kwargs['json']}
+            requests.post(self.config.API_URL+'update_creations', data=payload)
+        if method == "update_modreqs":
+            payload = {'json': kwargs['json']}
+            r = requests.post(self.config.API_URL+'update_modreqs', data=payload)
+        if method == "update_player_times":
+            payload = {'json': kwargs['json']}
+            requests.post(self.config.API_URL+'update_player_times', data=payload)
 
 
 import wiki, mumble, irc, mc_ping, top_players, reddit, forums, staff, modreq

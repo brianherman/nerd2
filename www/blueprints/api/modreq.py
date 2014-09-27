@@ -4,52 +4,44 @@ from flask.ext.restful.reqparse import RequestParser
 from models import db
 from models.modreq import Modreq
 
+import json
 
-class UpdateModreq(Resource):
+
+class UpdateModreqs(Resource):
     post_parser = RequestParser()
-    post_parser.add_argument("id", type=int, required=True)
-    post_parser.add_argument("server", type=str, required=True)
-    post_parser.add_argument("status", type=str, required=True)
-    post_parser.add_argument("request_by", type=str, required=True)
-    post_parser.add_argument("response_by", type=str, required=True)
-    post_parser.add_argument("request_text", type=str, required=True)
-    post_parser.add_argument("response_text", type=str, required=True)
+    post_parser.add_argument("json", type=str, required=True)
 
     def post(self):
         args = self.post_parser.parse_args()
 
-        modreq = Modreq.query.filter_by(
-            id=args.get("id"),
-            server=args.get("server")
-        ).first()
-        if modreq:
-            modreq.status = args.get("status")
-            modreq.response_by = args.get("response_by")
-            modreq.response_text = args.get("response_text")
-        else:
-            modreq = Modreq(
-                args.get("id"),
-                args.get("server"),
-                args.get("status"),
-                args.get("request_by"),
-                args.get("response_by"),
-                args.get("request_text"),
-                args.get("response_text")
-            )
-            db.session.add(modreq)
+        modreqs = json.loads(args.get("json"))
+        for modreq in modreqs:
+            modreq_obj = Modreq.query.filter_by(
+                id=modreq['id'],
+                server=modreq['server']
+            ).first()
+            if modreq_obj:
+                modreq_obj.status = modreq['status']
+                modreq_obj.response_by = modreq['response_by']
+                modreq_obj.response_text = modreq['response_text']
+            else:
+                modreq_obj = Modreq(
+                    modreq['id'],
+                    modreq['server'],
+                    modreq['status'],
+                    modreq['request_by'],
+                    modreq['response_by'],
+                    modreq['request_text'],
+                    modreq['response_text']
+                )
+                db.session.add(modreq_obj)
         db.session.commit()
 
-        return {
-            'id': args.get("id"),
-            'server': args.get("server"),
-            'status': args.get("status"),
-            'request_by': args.get("request_by"),
-            'response_by': args.get("response_by"),
-            'request_text': args.get("request_text"),
-            'response_text': args.get("response_text")
-        }
+        return {'success': True}
 
-api.add_resource(UpdateModreq, '/update_modreq')
+
+api.add_resource(UpdateModreqs, '/update_modreqs')
+
 
 class GetModreqs(Resource):
     get_parser = RequestParser()
@@ -72,5 +64,6 @@ class GetModreqs(Resource):
             ))
 
         return response
+
 
 api.add_resource(GetModreqs, '/get_modreqs')

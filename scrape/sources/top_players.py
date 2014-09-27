@@ -44,10 +44,16 @@ class TopPlayersSource(Source):
         online = json.dumps(data['online'])
         self.api_call("update_cache", key="MC_%s_ONLINE" % server.upper(), value=online)
 
-        stats = data['players']
-        for playername,times in stats.items():
+        players = data['players']
+        stats = []
+        for playername,times in players.items():
+            stat = {}
             seconds = times['min'] / 1000
-            self.api_call("update_playertime", playername=playername, server=server, seconds=seconds)
+            stat['playername'] = playername
+            stat['server'] = server
+            stat['seconds'] = seconds
+            stats.append(stat)
+        self.api_call("update_player_times", json=json.dumps(stats))
 
 
 source = TopPlayersSource
