@@ -85,10 +85,10 @@ class MinecraftPingSource(Source):
             value="online")
         self.api_call("update_cache",
             key="MC_%s_USERS_CURRENT" % server,
-            value=data['players']['online'])
+            value=users_current)
         self.api_call("update_cache",
             key="MC_%s_USERS_MAX" % server,
-            value=data['players']['max'])
+            value=users_max)
 
     def server_down(self, server):
         self.api_call("update_cache",
