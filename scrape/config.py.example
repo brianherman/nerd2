@@ -1,1 +1,13 @@
 API_URL = "http://mcpublic.net/api/"
+
+# IRC Bouncer config.
+# As #RedditMC is private, you have to be in the channel to get a user count.
+# Enter in your IRC Bouncer details below - it will have to be in #RedditMC to get users.
+IRC_SERVER = "irc.example.net"
+IRC_PORT = 6667
+IRC_SSL = False
+IRC_PASSWORD = "ReallySecurePassword" # Server password, not nickname services!
+IRC_NICK = "DeveloperMan"
+IRC_USER = "DeveloperMan"
+IRC_REALNAME = "Developer Man"
+IRC_CHANNEL = "#RedditMC"
