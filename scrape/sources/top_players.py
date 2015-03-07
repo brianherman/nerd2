@@ -49,7 +49,9 @@ class TopPlayersSource(Source):
         for playername,times in players.items():
             stat = {}
             seconds = times['min'] / 1000
-            stat['playername'] = playername
+            # quick uuid patch
+            # stat['playername'] = playername
+            stat['playername'] = times['name']
             stat['server'] = server
             stat['seconds'] = seconds
             stats.append(stat)
