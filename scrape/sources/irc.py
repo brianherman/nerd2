@@ -29,9 +29,9 @@ class IRCProtocol(LineReceiver):
             self.sendLine("LIST %s" % self.config.IRC_CHANNEL)
             return
 
-        list_ = re.match(r'^:\S+ 322 (\S+) (\S+) (\d+)', line)
+        list_ = re.match(r'^:\S+ 322 (\S+) %s (\d+)' % self.config.IRC_CHANNEL, line, re.IGNORECASE)
         if list_:
-            self.factory.got_users(int(list_.group(3)))
+            self.factory.got_users(int(list_.group(2)))
             self.done = True
             self.sendLine("QUIT :quit")
             self.transport.loseConnection()
