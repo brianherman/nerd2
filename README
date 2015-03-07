@@ -1,13 +1,10 @@
 Original mockups: https://imgur.com/a/6bkvy
 
-Website IP: 107.161.23.181 
-(protected against up to 10Gbps or ~2 million PPS for a wide array of TCP and UDP attacks via a GRE tunnel from Staminus)
 Domain: mcpublic.net
 
 Dependencies:
  - python 2.7
  - requirements.txt
-
 
 Scrapers:
  - forums [DONE]
