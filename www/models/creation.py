@@ -3,10 +3,14 @@ from . import db
 class Creation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    server = db.Column(db.String(10), primary_key=True, index=True)
-    revision = db.Column(db.Integer, primary_key=True)
-    x = db.Column(db.Integer, primary_key=True)
-    z = db.Column(db.Integer, primary_key=True)
+    # server = db.Column(db.String(10), primary_key=True, index=True)
+    # revision = db.Column(db.Integer, primary_key=True)
+    # x = db.Column(db.Integer, primary_key=True)
+    # z = db.Column(db.Integer, primary_key=True)
+    server = db.Column(db.String(10), index=True)
+    revision = db.Column(db.Integer)
+    x = db.Column(db.Integer)
+    z = db.Column(db.Integer)
 
     def __init__(self, name, server, revision, x, z):
         self.name = name

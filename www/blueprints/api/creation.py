@@ -21,7 +21,7 @@ class UpdateCreations(Resource):
                 x=creation['x'],
                 z=creation['z']
             ).first()
-            if creation:
+            if creation_obj:
                 pass
             else:
                 creation_obj = Creation(
